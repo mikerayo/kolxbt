@@ -4,7 +4,7 @@ services:
     name: kol-tracker-dashboard
     runtime: python
     plan: starter
-    region: oregon
+    region: virginia
     branch: main
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
     startCommand: streamlit run dashboard/dashboard_unified.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true
@@ -31,7 +31,7 @@ workers:
     name: kol-tracker-all
     runtime: python
     plan: starter
-    region: oregon
+    region: virginia
     branch: main
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
     # Initialize DB and start all processes
