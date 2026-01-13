@@ -13,24 +13,23 @@ services:
         value: 3.11.0
       - key: PORT
         value: 8501
-      # Connect to EXISTING database - don't create new one
+      # Connect to EXISTING database
       - key: DATABASE_URL
         value: postgresql://kol_tracker_db_user:quNTItA4CvEhk9KmsK1irizJQQGWu99X@dpg-d5jcq924d50c73fqo9t0-a.virginia-postgres.render.com/kol_tracker_db
 
-workers:
-  # Single worker that runs ALL processes in parallel
-  - type: worker
+  # Background processes - runs all workers in one service
+  - type: web
     name: kol-tracker-all
     runtime: python
     plan: starter
     region: virginia
     branch: main
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    # Initialize DB and start all processes
+    # Start all background processes (doesn't need to listen on PORT)
     startCommand: python init_db.py && python run_all_processes.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
-      # Connect to EXISTING database - don't create new one
+      # Connect to EXISTING database
       - key: DATABASE_URL
         value: postgresql://kol_tracker_db_user:quNTItA4CvEhk9KmsK1irizJQQGWu99X@dpg-d5jcq924d50c73fqo9t0-a.virginia-postgres.render.com/kol_tracker_db
