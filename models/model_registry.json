@@ -1,0 +1,162 @@
+{
+  "token_predictor": {
+    "name": "token_predictor",
+    "versions": [
+      {
+        "version": "v20260112_190901",
+        "trained_at": "2026-01-12T19:09:01.985137",
+        "metrics": {
+          "auc": 0.7265700483091787,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metadata": {
+          "train_samples": 51,
+          "val_samples": 1038,
+          "epochs_trained": 30,
+          "best_metric": 0.7265700483091787
+        },
+        "model_path": "models/token_predictor_best.pth"
+      },
+      {
+        "version": "v20260113_011306",
+        "trained_at": "2026-01-13T01:13:06.551632",
+        "metrics": {
+          "auc": 0.5740753639339695,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metadata": {
+          "train_samples": 75,
+          "val_samples": 2058,
+          "epochs_trained": 2,
+          "best_metric": 0.8537298878595807
+        },
+        "model_path": "models/token_predictor_best.pth"
+      },
+      {
+        "version": "v20260113_121346",
+        "trained_at": "2026-01-13T12:13:46.421408",
+        "metrics": {
+          "auc": 0.6691146470828233,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metadata": {
+          "train_samples": 75,
+          "val_samples": 2459,
+          "epochs_trained": 2,
+          "best_metric": 0.7669828641370869
+        },
+        "model_path": "models/token_predictor_best.pth"
+      },
+      {
+        "version": "v20260113_121424",
+        "trained_at": "2026-01-13T12:14:24.504057",
+        "metrics": {
+          "auc": 0.2582109343125255,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metadata": {
+          "train_samples": 75,
+          "val_samples": 2459,
+          "epochs_trained": 1,
+          "best_metric": 0.47776417788657694
+        },
+        "model_path": "models/token_predictor_best.pth"
+      },
+      {
+        "version": "v20260113_131901",
+        "trained_at": "2026-01-13T13:19:01.019256",
+        "metrics": {
+          "auc": 0.37617299061607506,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metadata": {
+          "train_samples": 75,
+          "val_samples": 2459,
+          "epochs_trained": 13,
+          "best_metric": 0.5064259485924112
+        },
+        "model_path": "models/token_predictor_best.pth"
+      },
+      {
+        "version": "v20260113_141902",
+        "trained_at": "2026-01-13T14:19:02.463846",
+        "metrics": {
+          "auc": 0.3981028151774786,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metadata": {
+          "train_samples": 75,
+          "val_samples": 2459,
+          "epochs_trained": 18,
+          "best_metric": 0.7122093023255813
+        },
+        "model_path": "models/token_predictor_best.pth"
+      },
+      {
+        "version": "v20260113_151903",
+        "trained_at": "2026-01-13T15:19:03.030974",
+        "metrics": {
+          "auc": 0.4045797633618931,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metadata": {
+          "train_samples": 75,
+          "val_samples": 2459,
+          "epochs_trained": 1,
+          "best_metric": 0.48158914728682173
+        },
+        "model_path": "models/token_predictor_best.pth"
+      },
+      {
+        "version": "v20260113_161903",
+        "trained_at": "2026-01-13T16:19:03.540070",
+        "metrics": {
+          "auc": 0.40182578539371683,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metadata": {
+          "train_samples": 75,
+          "val_samples": 2459,
+          "epochs_trained": 1,
+          "best_metric": 0.4564463484292126
+        },
+        "model_path": "models/token_predictor_best.pth"
+      },
+      {
+        "version": "v20260113_171904",
+        "trained_at": "2026-01-13T17:19:04.122924",
+        "metrics": {
+          "auc": 0.13611791105671156,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "metadata": {
+          "train_samples": 75,
+          "val_samples": 2459,
+          "epochs_trained": 1,
+          "best_metric": 0.7854447164422684
+        },
+        "model_path": "models/token_predictor_best.pth"
+      }
+    ],
+    "latest_version": "v20260113_171904",
+    "best_version": "v20260112_190901"
+  }
+}

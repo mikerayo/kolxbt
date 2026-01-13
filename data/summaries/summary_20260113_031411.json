@@ -1,0 +1,330 @@
+{
+  "timestamp": "2026-01-13T03:14:11.899672",
+  "period_start": "2026-01-13T02:59:11.899672",
+  "run_stats": {
+    "total_kols": 450,
+    "total_trades": 14362,
+    "total_closed_positions": 2681,
+    "recent_trades_last_15min": 3,
+    "active_kols_period": 1,
+    "coverage_percentage": 100.0
+  },
+  "kol_stats": {
+    "avg_diamond_hand_score": 18.4,
+    "avg_win_rate_percentage": 22.89,
+    "avg_hold_time_hours": 0.63,
+    "total_diamond_hands": 2,
+    "total_scalpers": 70,
+    "total_analyzed": 247,
+    "period_avg_trades_per_kol": 3.0,
+    "period_total_pnl_sol": 0
+  },
+  "trading_stats": {
+    "total_volume_sol": 14034.24,
+    "period_volume_sol": 2.8,
+    "total_buys": 7231,
+    "total_sells": 7131,
+    "period_buys": 1,
+    "period_sells": 2,
+    "buy_sell_ratio": 0.5,
+    "overall_win_rate_percentage": 83.89,
+    "period_win_rate_percentage": 0,
+    "active_dexs": 2
+  },
+  "period_performers": {
+    "top_10_active": [
+      {
+        "name": "decu",
+        "kol_id": 5,
+        "period_trades": 3,
+        "period_bought_sol": 0.01,
+        "period_sold_sol": 2.79,
+        "net_volume_sol": 2.78,
+        "diamond_hand_score": 23.67,
+        "win_rate": 0.0
+      }
+    ],
+    "most_active_name": "decu",
+    "most_active_trades": 3
+  },
+  "all_time_performers": {
+    "top_10": [
+      {
+        "rank": 1,
+        "name": "slingoor",
+        "diamond_hand_score": 68.25,
+        "total_trades": 2,
+        "win_rate": 1.0,
+        "total_pnl_sol": 5.686222035,
+        "avg_hold_time_hours": 0.7805555555555556
+      },
+      {
+        "rank": 2,
+        "name": "cryptovillain26",
+        "diamond_hand_score": 60.31,
+        "total_trades": 2,
+        "win_rate": 0.5,
+        "total_pnl_sol": 4.152869574999997,
+        "avg_hold_time_hours": 0.7465277777777778
+      },
+      {
+        "rank": 3,
+        "name": "jitter",
+        "diamond_hand_score": 60.09,
+        "total_trades": 1,
+        "win_rate": 1.0,
+        "total_pnl_sol": 6.709914135000001,
+        "avg_hold_time_hours": 0.044444444444444446
+      },
+      {
+        "rank": 4,
+        "name": "Groovy",
+        "diamond_hand_score": 43.79,
+        "total_trades": 6,
+        "win_rate": 0.5,
+        "total_pnl_sol": 6.482011035000001,
+        "avg_hold_time_hours": 8.811990740740741
+      },
+      {
+        "rank": 5,
+        "name": "fl0wjoe",
+        "diamond_hand_score": 42.37,
+        "total_trades": 10,
+        "win_rate": 0.6,
+        "total_pnl_sol": 9.128452925000005,
+        "avg_hold_time_hours": 0.029666666666666668
+      },
+      {
+        "rank": 6,
+        "name": "Mayhem Bot",
+        "diamond_hand_score": 39.76,
+        "total_trades": 75,
+        "win_rate": 0.7866666666666666,
+        "total_pnl_sol": 0.7867638430043371,
+        "avg_hold_time_hours": 0.011662962962962964
+      },
+      {
+        "rank": 7,
+        "name": "Mr. Frog",
+        "diamond_hand_score": 39.18,
+        "total_trades": 4,
+        "win_rate": 1.0,
+        "total_pnl_sol": 4.230188144999999,
+        "avg_hold_time_hours": 0.011944444444444445
+      },
+      {
+        "rank": 8,
+        "name": "Earl",
+        "diamond_hand_score": 37.7,
+        "total_trades": 4,
+        "win_rate": 0.75,
+        "total_pnl_sol": 0.15346831900000524,
+        "avg_hold_time_hours": 0.013680555555555555
+      },
+      {
+        "rank": 9,
+        "name": "King",
+        "diamond_hand_score": 36.94,
+        "total_trades": 4,
+        "win_rate": 0.75,
+        "total_pnl_sol": 3.8801196069999975,
+        "avg_hold_time_hours": 0.044375
+      },
+      {
+        "rank": 10,
+        "name": "peacefuldestroy",
+        "diamond_hand_score": 35.99,
+        "total_trades": 5,
+        "win_rate": 0.4,
+        "total_pnl_sol": 1.7940769730000004,
+        "avg_hold_time_hours": 0.03205555555555555
+      }
+    ],
+    "best_score": 68.25,
+    "best_kol": "slingoor"
+  },
+  "period_tokens": [
+    {
+      "token_address": "A9PGVTxbej...",
+      "full_address": "A9PGVTxbej1Xb24ZsjP5SNcEeS8LB7a9tBwo52uspump",
+      "trade_count": 3,
+      "unique_kols_trading": 1,
+      "total_volume_sol": 0.01
+    }
+  ],
+  "period_dexs": [
+    {
+      "name": "pump_fun",
+      "trade_count": 3,
+      "volume_sol": 2.8
+    }
+  ],
+  "recent_activity": [
+    {
+      "kol_name": "decu",
+      "operation": "sell",
+      "token": "A9PGVTxbej...",
+      "amount_sol": 1.5386,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:03:31"
+    },
+    {
+      "kol_name": "decu",
+      "operation": "buy",
+      "token": "A9PGVTxbej...",
+      "amount_sol": 0.0101,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:03:16"
+    },
+    {
+      "kol_name": "decu",
+      "operation": "sell",
+      "token": "A9PGVTxbej...",
+      "amount_sol": 1.2494,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:03:11"
+    },
+    {
+      "kol_name": "decu",
+      "operation": "sell",
+      "token": "7ctfda555r...",
+      "amount_sol": 1.3797,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:58:44"
+    },
+    {
+      "kol_name": "decu",
+      "operation": "buy",
+      "token": "7ctfda555r...",
+      "amount_sol": 0.0101,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:58:15"
+    },
+    {
+      "kol_name": "decu",
+      "operation": "sell",
+      "token": "ysWqTgcfb1...",
+      "amount_sol": 1.7691,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:53:59"
+    },
+    {
+      "kol_name": "J Spizzle",
+      "operation": "sell",
+      "token": "9YHLjtatNx...",
+      "amount_sol": 0.9373,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:52:04"
+    },
+    {
+      "kol_name": "decu",
+      "operation": "sell",
+      "token": "UNFd3ZNMwb...",
+      "amount_sol": 1.7671,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:49:44"
+    },
+    {
+      "kol_name": "decu",
+      "operation": "buy",
+      "token": "UNFd3ZNMwb...",
+      "amount_sol": 0.0101,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:49:24"
+    },
+    {
+      "kol_name": "J Spizzle",
+      "operation": "buy",
+      "token": "9YHLjtatNx...",
+      "amount_sol": 0.5059,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:48:31"
+    },
+    {
+      "kol_name": "J Spizzle",
+      "operation": "sell",
+      "token": "8vNKNzbwqE...",
+      "amount_sol": 0.9353,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:48:28"
+    },
+    {
+      "kol_name": "Clown",
+      "operation": "sell",
+      "token": "CJLL88aAh5...",
+      "amount_sol": 1.7367,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:48:15"
+    },
+    {
+      "kol_name": "J Spizzle",
+      "operation": "buy",
+      "token": "8vNKNzbwqE...",
+      "amount_sol": 1.0109,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:47:58"
+    },
+    {
+      "kol_name": "J Spizzle",
+      "operation": "sell",
+      "token": "8vNKNzbwqE...",
+      "amount_sol": 1.1186,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:47:56"
+    },
+    {
+      "kol_name": "Mayhem Bot",
+      "operation": "sell",
+      "token": "CADFcEzu7B...",
+      "amount_sol": 0.0974,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:46:13"
+    },
+    {
+      "kol_name": "Mayhem Bot",
+      "operation": "sell",
+      "token": "9oFY6y6GEa...",
+      "amount_sol": 0.04,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:46:13"
+    },
+    {
+      "kol_name": "Mayhem Bot",
+      "operation": "buy",
+      "token": "CADFcEzu7B...",
+      "amount_sol": 0.0811,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:46:11"
+    },
+    {
+      "kol_name": "Mayhem Bot",
+      "operation": "sell",
+      "token": "9oFY6y6GEa...",
+      "amount_sol": 0.0501,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:46:10"
+    },
+    {
+      "kol_name": "Mayhem Bot",
+      "operation": "sell",
+      "token": "FCbZubmz3i...",
+      "amount_sol": 0.0045,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:46:08"
+    },
+    {
+      "kol_name": "Mayhem Bot",
+      "operation": "sell",
+      "token": "9oFY6y6GEa...",
+      "amount_sol": 0.0626,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T02:46:08"
+    }
+  ],
+  "trends": {
+    "current_period_trades": 3,
+    "previous_period_trades": 78,
+    "trend_direction": "down",
+    "trend_percentage": -96.2
+  }
+}

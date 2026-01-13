@@ -1,0 +1,99 @@
+# KOL Tracker ML - Render Deployment Configuration
+# Este archivo configura todos los servicios para despliegue en Render
+
+services:
+  # =============================================================================
+  # DASHBOARD (Web Service)
+  # =============================================================================
+  - type: web
+    name: kol-tracker-dashboard
+    env: python
+    region: oregon
+    plan: starter
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: streamlit run dashboard/dashboard_unified.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true
+
+    # Auto-deploy from main branch
+    branch: main
+
+    # Environment variables
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: PORT
+        value: 8501
+
+    # Health check
+    healthCheckPath: /
+
+# =============================================================================
+# BACKGROUND WORKERS (Procesos continuos)
+# =============================================================================
+workers:
+  # -----------------------------------------------------------------------------
+  # TRACKER - Escanea trades cada 5 minutos
+  # -----------------------------------------------------------------------------
+  - type: worker
+    name: kol-tracker
+    env: python
+    region: oregon
+    plan: starter
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: python processes/run_tracker_continuous.py
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: WORKER_TYPE
+        value: tracker
+
+  # -----------------------------------------------------------------------------
+  # ML TRAINER - Reentrena modelos cada 1 hora
+  # -----------------------------------------------------------------------------
+  - type: worker
+    name: ml-trainer
+    env: python
+    region: oregon
+    plan: starter
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: python processes/run_continuous_trainer.py
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: WORKER_TYPE
+        value: trainer
+
+  # -----------------------------------------------------------------------------
+  # TOKEN DISCOVERY - Descubre nuevos traders cada 1 hora
+  # -----------------------------------------------------------------------------
+  - type: worker
+    name: token-discovery
+    env: python
+    region: oregon
+    plan: starter
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: python discovery/run_token_discovery_continuous.py
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: WORKER_TYPE
+        value: discovery
+
+  # -----------------------------------------------------------------------------
+  # TOKEN UPDATER - Actualiza tokens cada 35 minutos
+  # -----------------------------------------------------------------------------
+  - type: worker
+    name: token-updater
+    env: python
+    region: oregon
+    plan: starter
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: python processes/run_token_updater_both_continuous.py
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: WORKER_TYPE
+        value: updater

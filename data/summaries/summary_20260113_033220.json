@@ -1,0 +1,194 @@
+{
+  "timestamp": "2026-01-13T03:32:20.784940",
+  "run_stats": {
+    "total_kols": 450,
+    "total_trades": 14693,
+    "total_closed_positions": 2729,
+    "recent_trades_last_15min": 0,
+    "coverage_percentage": 100.0
+  },
+  "kol_stats": {
+    "avg_diamond_hand_score": 18.4,
+    "avg_win_rate_percentage": 22.89,
+    "avg_hold_time_hours": 0.63,
+    "total_diamond_hands": 2,
+    "total_scalpers": 70,
+    "total_analyzed": 247
+  },
+  "trading_stats": {
+    "total_volume_sol": 14328.47,
+    "total_buys": 7406,
+    "total_sells": 7287,
+    "buy_sell_ratio": 1.02,
+    "overall_win_rate_percentage": 83.91,
+    "active_dexs": 2
+  },
+  "top_performers": {
+    "top_10": [
+      {
+        "rank": 1,
+        "name": "slingoor",
+        "diamond_hand_score": 68.25,
+        "total_trades": 2,
+        "win_rate": 1.0,
+        "total_pnl_sol": 5.686222035
+      },
+      {
+        "rank": 2,
+        "name": "cryptovillain26",
+        "diamond_hand_score": 60.31,
+        "total_trades": 2,
+        "win_rate": 0.5,
+        "total_pnl_sol": 4.152869574999997
+      },
+      {
+        "rank": 3,
+        "name": "jitter",
+        "diamond_hand_score": 60.09,
+        "total_trades": 1,
+        "win_rate": 1.0,
+        "total_pnl_sol": 6.709914135000001
+      },
+      {
+        "rank": 4,
+        "name": "Groovy",
+        "diamond_hand_score": 43.79,
+        "total_trades": 6,
+        "win_rate": 0.5,
+        "total_pnl_sol": 6.482011035000001
+      },
+      {
+        "rank": 5,
+        "name": "fl0wjoe",
+        "diamond_hand_score": 42.37,
+        "total_trades": 10,
+        "win_rate": 0.6,
+        "total_pnl_sol": 9.128452925000005
+      },
+      {
+        "rank": 6,
+        "name": "Mayhem Bot",
+        "diamond_hand_score": 39.76,
+        "total_trades": 75,
+        "win_rate": 0.7866666666666666,
+        "total_pnl_sol": 0.7867638430043371
+      },
+      {
+        "rank": 7,
+        "name": "Mr. Frog",
+        "diamond_hand_score": 39.18,
+        "total_trades": 4,
+        "win_rate": 1.0,
+        "total_pnl_sol": 4.230188144999999
+      },
+      {
+        "rank": 8,
+        "name": "Earl",
+        "diamond_hand_score": 37.7,
+        "total_trades": 4,
+        "win_rate": 0.75,
+        "total_pnl_sol": 0.15346831900000524
+      },
+      {
+        "rank": 9,
+        "name": "King",
+        "diamond_hand_score": 36.94,
+        "total_trades": 4,
+        "win_rate": 0.75,
+        "total_pnl_sol": 3.8801196069999975
+      },
+      {
+        "rank": 10,
+        "name": "peacefuldestroy",
+        "diamond_hand_score": 35.99,
+        "total_trades": 5,
+        "win_rate": 0.4,
+        "total_pnl_sol": 1.7940769730000004
+      }
+    ],
+    "best_score": 68.25,
+    "best_kol": "slingoor"
+  },
+  "recent_activity": [
+    {
+      "kol_name": "Dex",
+      "operation": "sell",
+      "token": "BPVMHmA8...",
+      "amount_sol": 1.6005,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:27:53"
+    },
+    {
+      "kol_name": "Dex",
+      "operation": "buy",
+      "token": "BPVMHmA8...",
+      "amount_sol": 0.1345,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:27:41"
+    },
+    {
+      "kol_name": "ozark",
+      "operation": "sell",
+      "token": "BPVMHmA8...",
+      "amount_sol": 1.8677,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:27:13"
+    },
+    {
+      "kol_name": "ozark",
+      "operation": "buy",
+      "token": "BPVMHmA8...",
+      "amount_sol": 0.1151,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:27:06"
+    },
+    {
+      "kol_name": "Gasp",
+      "operation": "sell",
+      "token": "5SsXdEUy...",
+      "amount_sol": 1.8189,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:26:42"
+    },
+    {
+      "kol_name": "ozark",
+      "operation": "buy",
+      "token": "BPVMHmA8...",
+      "amount_sol": 0.0936,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:26:38"
+    },
+    {
+      "kol_name": "ozark",
+      "operation": "sell",
+      "token": "9Niq66KZ...",
+      "amount_sol": 1.0011,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:25:58"
+    },
+    {
+      "kol_name": "Kadenox",
+      "operation": "sell",
+      "token": "5SsXdEUy...",
+      "amount_sol": 1.8575,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:25:46"
+    },
+    {
+      "kol_name": "Kadenox",
+      "operation": "sell",
+      "token": "5SsXdEUy...",
+      "amount_sol": 1.9167,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:25:43"
+    },
+    {
+      "kol_name": "Ethan Prosper",
+      "operation": "sell",
+      "token": "2TvkjDjt...",
+      "amount_sol": 1.7703,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T03:22:02"
+    }
+  ]
+}

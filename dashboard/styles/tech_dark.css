@@ -1,0 +1,470 @@
+"""
+Tech Dark Dashboard Theme
+Based on Dribbble reference designs
+Minimalist dark theme with high contrast and data focus
+"""
+
+# CSS Variables for Tech Dark Theme
+TECH_DARK_CSS = """
+<style>
+/* ===== RESET & BASE ===== */
+:root {
+    /* Color Palette - Exact from reference */
+    --bg-primary: #1A1A1A;
+    --bg-secondary: #1E1E1E;
+    --bg-card: #252525;
+    --bg-hover: #2A2A2A;
+
+    /* Text Colors */
+    --text-primary: #FFFFFF;
+    --text-secondary: #B0B0B0;
+    --text-tertiary: #808080;
+
+    /* Accent Colors */
+    --accent-success: #10B981;
+    --accent-primary: #3B82F6;
+    --accent-warning: #F59E0B;
+    --accent-error: #EF4444;
+
+    /* Chart Gradients */
+    --chart-blue-start: #4FC3F7;
+    --chart-blue-end: #2196F3;
+    --chart-green-start: #81C784;
+    --chart-green-end: #4CAF50;
+
+    /* Spacing - 8px Grid System */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+
+    /* Shadows - Subtle */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3);
+
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.3s ease;
+}
+
+/* ===== GLOBAL STYLES ===== */
+.main {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ===== SIDEBAR ===== */
+[data-testid="stSidebar"] {
+    background-color: var(--bg-secondary) !important;
+    width: 240px !important;
+    border-right: 1px solid var(--bg-card);
+    padding: var(--space-4) !important;
+}
+
+[data-testid="stSidebar"] > div {
+    gap: var(--space-3) !important;
+}
+
+/* Sidebar Navigation Items */
+.css-1d391kg {
+    background-color: transparent !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-3) var(--space-4) !important;
+    color: var(--text-secondary) !important;
+    transition: all var(--transition-normal) !important;
+}
+
+.css-1d391kg:hover {
+    background-color: var(--accent-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.css-1d391kg[data-selected="true"] {
+    background-color: var(--accent-success) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ===== MAIN CONTENT ===== */
+.block-container {
+    padding: var(--space-6) !important;
+    max-width: 1600px !important;
+}
+
+/* ===== CARDS ===== */
+.divider {
+    border-color: var(--bg-card) !important;
+}
+
+/* Metric Cards */
+.css-1kyxreq {
+    background-color: var(--bg-card) !important;
+    border-radius: var(--radius-md) !important;
+    border: none !important;
+    padding: var(--space-5) !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: all var(--transition-normal) !important;
+}
+
+.css-1kyxreq:hover {
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-1px);
+}
+
+/* ===== TYPOGRAPHY ===== */
+/* Titles */
+h1 {
+    color: var(--text-primary) !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.5px;
+    margin-bottom: var(--space-2) !important;
+}
+
+h2 {
+    color: var(--text-primary) !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.3px;
+    margin-bottom: var(--space-3) !important;
+}
+
+h3 {
+    color: var(--text-secondary) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-2) !important;
+}
+
+/* Labels */
+label {
+    color: var(--text-secondary) !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+}
+
+/* Metric Values - Large & Bold */
+[data-testid="stMetricValue"] {
+    font-size: 48px !important;
+    font-weight: 700 !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -1px;
+}
+
+/* Metric Labels */
+[data-testid="stMetricLabel"] {
+    color: var(--text-secondary) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ===== BUTTONS ===== */
+.stButton > button {
+    background-color: var(--accent-primary) !important;
+    color: var(--text-primary) !important;
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-3) var(--space-5) !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: all var(--transition-normal) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.stButton > button:hover {
+    background-color: #2563EB !important;
+    box-shadow: var(--shadow-md) !important;
+    transform: translateY(-1px);
+}
+
+/* Secondary Button */
+.stButton > button[kind="secondary"] {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--bg-hover) !important;
+}
+
+/* ===== INPUTS ===== */
+.stTextInput > div > div > input {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--bg-hover) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-3) var(--space-4) !important;
+}
+
+.stTextInput > div > div > input:focus {
+    border-color: var(--accent-primary) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* ===== SELECTBOX ===== */
+.stSelectbox > div > div > select {
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--bg-hover) !important;
+    border-radius: var(--radius-md) !important;
+}
+
+/* ===== DATAFRAME ===== */
+[data-testid="stDataFrame"] {
+    background-color: var(--bg-card) !important;
+    border-radius: var(--radius-md) !important;
+    overflow: hidden;
+}
+
+.dataframe {
+    border: none !important;
+    color: var(--text-primary) !important;
+}
+
+.dataframe th {
+    background-color: var(--bg-hover) !important;
+    color: var(--text-secondary) !important;
+    font-weight: 600 !important;
+    padding: var(--space-3) var(--space-4) !important;
+    text-transform: uppercase;
+    font-size: 12px !important;
+    letter-spacing: 0.5px;
+}
+
+.dataframe td {
+    padding: var(--space-3) var(--space-4) !important;
+    border-bottom: 1px solid var(--bg-hover) !important;
+}
+
+.dataframe tr:hover td {
+    background-color: var(--bg-hover) !important;
+}
+
+/* ===== TABS ===== */
+[data-testid="stTabs"] > div > div > div > div {
+    background-color: var(--bg-card) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-1) !important;
+}
+
+[data-testid="stTabs"] > div > div > div > div > div {
+    color: var(--text-secondary) !important;
+    font-weight: 500 !important;
+    padding: var(--space-3) var(--space-4) !important;
+    border-radius: var(--radius-md) !important;
+    transition: all var(--transition-normal) !important;
+}
+
+[data-testid="stTabs"] > div > div > div > div > div:hover {
+    color: var(--text-primary) !important;
+}
+
+[data-testid="stTabs"] > div > div > div > div > div[aria-selected="true"] {
+    background-color: var(--accent-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ===== EXPANDERS ===== */
+.streamlit-expanderHeader {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--bg-hover) !important;
+    border-radius: var(--radius-md) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    padding: var(--space-4) !important;
+    transition: all var(--transition-normal) !important;
+}
+
+.streamlit-expanderHeader:hover {
+    background-color: var(--bg-hover) !important;
+}
+
+.streamlit-expanderContent {
+    background-color: var(--bg-secondary) !important;
+    border: 1px solid var(--bg-hover) !important;
+    border-top: none !important;
+    border-radius: 0 0 var(--radius-md) var(--radius-md) !important;
+    padding: var(--space-4) !important;
+}
+
+/* ===== BADGES ===== */
+.badge-success {
+    background-color: var(--accent-success) !important;
+    color: var(--text-primary) !important;
+    padding: var(--space-1) var(--space-3) !important;
+    border-radius: var(--radius-xl) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    display: inline-block;
+}
+
+.badge-warning {
+    background-color: var(--accent-warning) !important;
+    color: var(--text-primary) !important;
+    padding: var(--space-1) var(--space-3) !important;
+    border-radius: var(--radius-xl) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    display: inline-block;
+}
+
+.badge-error {
+    background-color: var(--accent-error) !important;
+    color: var(--text-primary) !important;
+    padding: var(--space-1) var(--space-3) !important;
+    border-radius: var(--radius-xl) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    display: inline-block;
+}
+
+/* ===== PROGRESS BAR ===== */
+.stProgress > div > div > div > div {
+    background: linear-gradient(90deg, var(--chart-blue-start), var(--chart-blue-end)) !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+/* ===== INFO BOXES ===== */
+.stAlert {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--bg-hover) !important;
+    border-radius: var(--radius-md) !important;
+    padding: var(--space-4) !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.stAlert > div {
+    color: var(--text-primary) !important;
+}
+
+/* ===== CUSTOM COMPONENTS ===== */
+
+/* Status Badge */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-xl);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.success {
+    background-color: var(--accent-success);
+    color: var(--text-primary);
+}
+
+.status-badge.warning {
+    background-color: var(--accent-warning);
+    color: var(--text-primary);
+}
+
+.status-badge.error {
+    background-color: var(--accent-error);
+    color: var(--text-primary);
+}
+
+/* Trend Indicator */
+.trend-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    background-color: var(--bg-hover);
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.trend-indicator.positive {
+    color: var(--accent-success);
+}
+
+.trend-indicator.negative {
+    color: var(--accent-error);
+}
+
+/* ===== PLOTLY CHARTS ===== */
+.js-plotly-plot .plotly .mainline {
+    stroke: var(--accent-primary) !important;
+}
+
+.js-plotly-plot .plotly .legend {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--bg-hover) !important;
+    border-radius: var(--radius-md) !important;
+}
+
+.js-plotly-plot .plotly .modebar {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--bg-hover) !important;
+    border-radius: var(--radius-md) !important;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bg-hover);
+    border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+}
+
+/* ===== UTILITIES ===== */
+.text-gradient {
+    background: linear-gradient(135deg, var(--chart-blue-start), var(--chart-blue-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-success {
+    color: var(--accent-success) !important;
+}
+
+.text-warning {
+    color: var(--accent-warning) !important;
+}
+
+.text-error {
+    color: var(--accent-error) !important;
+}
+
+.bg-card {
+    background-color: var(--bg-card) !important;
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+}
+
+.glass-effect {
+    background: rgba(37, 37, 37, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+</style>
+"""

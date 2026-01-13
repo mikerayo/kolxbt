@@ -1,0 +1,194 @@
+{
+  "timestamp": "2026-01-13T02:02:20.618381",
+  "run_stats": {
+    "total_kols": 450,
+    "total_trades": 12739,
+    "total_closed_positions": 2377,
+    "recent_trades_last_15min": 0,
+    "coverage_percentage": 100.0
+  },
+  "kol_stats": {
+    "avg_diamond_hand_score": 18.54,
+    "avg_win_rate_percentage": 23.29,
+    "avg_hold_time_hours": 0.67,
+    "total_diamond_hands": 2,
+    "total_scalpers": 61,
+    "total_analyzed": 240
+  },
+  "trading_stats": {
+    "total_volume_sol": 12695.07,
+    "total_buys": 6436,
+    "total_sells": 6303,
+    "buy_sell_ratio": 1.02,
+    "overall_win_rate_percentage": 84.39,
+    "active_dexs": 2
+  },
+  "top_performers": {
+    "top_10": [
+      {
+        "rank": 1,
+        "name": "slingoor",
+        "diamond_hand_score": 68.25,
+        "total_trades": 2,
+        "win_rate": 1.0,
+        "total_pnl_sol": 5.686222035
+      },
+      {
+        "rank": 2,
+        "name": "cryptovillain26",
+        "diamond_hand_score": 61.13,
+        "total_trades": 1,
+        "win_rate": 1.0,
+        "total_pnl_sol": 2.5183260919999952
+      },
+      {
+        "rank": 3,
+        "name": "jitter",
+        "diamond_hand_score": 60.09,
+        "total_trades": 1,
+        "win_rate": 1.0,
+        "total_pnl_sol": 6.709914135000001
+      },
+      {
+        "rank": 4,
+        "name": "fl0wjoe",
+        "diamond_hand_score": 45.94,
+        "total_trades": 9,
+        "win_rate": 0.6666666666666666,
+        "total_pnl_sol": 7.663256674000003
+      },
+      {
+        "rank": 5,
+        "name": "Groovy",
+        "diamond_hand_score": 43.79,
+        "total_trades": 6,
+        "win_rate": 0.5,
+        "total_pnl_sol": 6.482011035000001
+      },
+      {
+        "rank": 6,
+        "name": "Mr. Frog",
+        "diamond_hand_score": 39.18,
+        "total_trades": 4,
+        "win_rate": 1.0,
+        "total_pnl_sol": 4.230188144999999
+      },
+      {
+        "rank": 7,
+        "name": "Earl",
+        "diamond_hand_score": 37.7,
+        "total_trades": 4,
+        "win_rate": 0.75,
+        "total_pnl_sol": 0.15346831900000524
+      },
+      {
+        "rank": 8,
+        "name": "King",
+        "diamond_hand_score": 36.94,
+        "total_trades": 4,
+        "win_rate": 0.75,
+        "total_pnl_sol": 3.8801196069999975
+      },
+      {
+        "rank": 9,
+        "name": "Setora",
+        "diamond_hand_score": 36.69,
+        "total_trades": 6,
+        "win_rate": 0.5,
+        "total_pnl_sol": 2.555710804999997
+      },
+      {
+        "rank": 10,
+        "name": "Mayhem Bot",
+        "diamond_hand_score": 34.66,
+        "total_trades": 31,
+        "win_rate": 0.7096774193548387,
+        "total_pnl_sol": 0.4560253310010012
+      }
+    ],
+    "best_score": 68.25,
+    "best_kol": "slingoor"
+  },
+  "recent_activity": [
+    {
+      "kol_name": "flock (6'3)",
+      "operation": "sell",
+      "token": "2s8tBycS...",
+      "amount_sol": 2.2787,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T01:54:00"
+    },
+    {
+      "kol_name": "danny",
+      "operation": "sell",
+      "token": "BjemWPqS...",
+      "amount_sol": 1.7848,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T01:29:59"
+    },
+    {
+      "kol_name": "danny",
+      "operation": "sell",
+      "token": "Hmi1Tv5Q...",
+      "amount_sol": 1.3603,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T01:29:40"
+    },
+    {
+      "kol_name": "Letterbomb",
+      "operation": "sell",
+      "token": "CJuEDB4A...",
+      "amount_sol": 1.385,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T01:27:53"
+    },
+    {
+      "kol_name": "Letterbomb",
+      "operation": "buy",
+      "token": "CJuEDB4A...",
+      "amount_sol": 0.0051,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T01:23:33"
+    },
+    {
+      "kol_name": "Letterbomb",
+      "operation": "buy",
+      "token": "CJuEDB4A...",
+      "amount_sol": 0.0051,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T01:23:33"
+    },
+    {
+      "kol_name": "Letterbomb",
+      "operation": "buy",
+      "token": "CJuEDB4A...",
+      "amount_sol": 0.0051,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T01:23:32"
+    },
+    {
+      "kol_name": "Letterbomb",
+      "operation": "buy",
+      "token": "CJuEDB4A...",
+      "amount_sol": 0.0051,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T01:23:32"
+    },
+    {
+      "kol_name": "Letterbomb",
+      "operation": "buy",
+      "token": "CJuEDB4A...",
+      "amount_sol": 0.0051,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T01:23:32"
+    },
+    {
+      "kol_name": "Letterbomb",
+      "operation": "buy",
+      "token": "CJuEDB4A...",
+      "amount_sol": 0.51,
+      "dex": "pump_fun",
+      "timestamp": "2026-01-13T01:23:22"
+    }
+  ]
+}

@@ -1,0 +1,365 @@
+/*
+KOL Tracker ML Dashboard - Animations & Enhanced Styles
+*/
+
+/* Fade in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scale in */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Glow effect */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(78, 205, 196, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(78, 205, 196, 0.8);
+    }
+}
+
+/* Count up animation */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Apply animations */
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.5s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.5s ease-out;
+}
+
+.scale-in {
+    animation: scaleIn 0.4s ease-out;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+.glow {
+    animation: glow 2s infinite;
+}
+
+/* Loading skeleton */
+.skeleton {
+    background: linear-gradient(90deg,
+        #2D2D2D 0%,
+        #3D3D3D 50%,
+        #2D2D2D 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 0.5rem;
+}
+
+/* Enhanced metric cards */
+.metric-card {
+    background: #2D2D2D;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid #444;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.metric-card:hover {
+    border-color: #4ECDC4;
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Gradient text */
+.gradient-text {
+    background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Badge styles */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    animation: scaleIn 0.3s ease-out;
+}
+
+.badge-diamond {
+    background: linear-gradient(135deg, #4ECDC4, #44A08D);
+    color: white;
+}
+
+.badge-scalper {
+    background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+    color: white;
+}
+
+.badge-sniper {
+    background: linear-gradient(135deg, #A8E6CF, #3DD5A6);
+    color: white;
+}
+
+.badge-default {
+    background: #444;
+    color: white;
+}
+
+/* Progress bar */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #2D2D2D;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4ECDC4, #44A08D);
+    transition: width 0.5s ease;
+    animation: shimmer 2s infinite;
+}
+
+/* Card hover effect */
+.hover-card {
+    background: #2D2D2D;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid #444;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.hover-card:hover {
+    border-color: #4ECDC4;
+    box-shadow: 0 8px 24px rgba(78, 205, 196, 0.3);
+    transform: translateY(-4px);
+}
+
+/* Smooth transitions */
+* {
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .metric-card {
+        padding: 1rem;
+    }
+
+    .badge {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+    }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1E1E1E;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4ECDC4;
+}
+
+/* Loading spinner */
+.spinner {
+    border: 4px solid #2D2D2D;
+    border-top: 4px solid #4ECDC4;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Alert banners */
+.alert-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-left: 4px solid #667eea;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    animation: slideInLeft 0.5s ease-out;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+    border-left: 4px solid #4ECDC4;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    animation: slideInLeft 0.5s ease-out;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    border-left: 4px solid #FFD700;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    animation: slideInLeft 0.5s ease-out;
+}
+
+.alert-error {
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+    border-left: 4px solid #FF6B6B;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    animation: slideInLeft 0.5s ease-out;
+}
+
+/* Button enhancements */
+.btn-primary {
+    background: linear-gradient(135deg, #4ECDC4, #44A08D);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(78, 205, 196, 0.4);
+}
+
+/* Tooltip styling */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    background-color: #2D2D2D;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 12px;
+    position: absolute;
+    z-index: 1000;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    border: 1px solid #4ECDC4;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    min-width: 120px;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #4ECDC4 transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Staggered animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
