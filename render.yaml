@@ -1,7 +1,4 @@
-# KOL Tracker ML - Render Blueprint Configuration
-
 services:
-  # Dashboard - Web Service
   - type: web
     name: kol-tracker-dashboard
     runtime: python
@@ -16,9 +13,7 @@ services:
       - key: PORT
         value: 8501
 
-# Workers - Background Processes
 workers:
-  # Tracker - Escanea trades cada 5 minutos
   - type: worker
     name: kol-tracker
     runtime: python
@@ -31,7 +26,6 @@ workers:
       - key: PYTHON_VERSION
         value: 3.11.0
 
-  # ML Trainer - Reentrena cada 1 hora
   - type: worker
     name: ml-trainer
     runtime: python
@@ -44,7 +38,6 @@ workers:
       - key: PYTHON_VERSION
         value: 3.11.0
 
-  # Token Discovery - Descubre traders cada 1 hora
   - type: worker
     name: token-discovery
     runtime: python
@@ -57,7 +50,6 @@ workers:
       - key: PYTHON_VERSION
         value: 3.11.0
 
-  # Token Updater - Actualiza tokens cada 35 minutos
   - type: worker
     name: token-updater
     runtime: python
