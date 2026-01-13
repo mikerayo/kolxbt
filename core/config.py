@@ -16,8 +16,12 @@ DATA_DIR.mkdir(exist_ok=True)
 # Input data file
 KOLS_DATA_FILE = BASE_DIR / "kolscan_complete_kols_all_periods.json"
 
-# Database
-DATABASE_URL = f"sqlite:///{DB_DIR / 'kol_tracker.db'}"
+# Database - Support both SQLite (local) and PostgreSQL (Render)
+# Uses DATABASE_URL env var if available (Render), otherwise SQLite (local)
+DATABASE_URL = os.getenv(
+    'DATABASE_URL',
+    f"sqlite:///{DB_DIR / 'kol_tracker.db'}"
+)
 
 # Solana RPC Configuration
 # Using Helius RPC (faster, higher rate limits)

@@ -12,6 +12,16 @@ services:
         value: 3.11.0
       - key: PORT
         value: 8501
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kol-tracker-db
+          property: connectionString
+
+databases:
+  - name: kol-tracker-db
+    databaseName: kol_tracker
+    user: kol_tracker_user
+    plan: starter # Uses the free PostgreSQL tier
 
 workers:
   - type: worker
@@ -25,6 +35,10 @@ workers:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kol-tracker-db
+          property: connectionString
 
   - type: worker
     name: ml-trainer
@@ -37,6 +51,10 @@ workers:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kol-tracker-db
+          property: connectionString
 
   - type: worker
     name: token-discovery
@@ -49,6 +67,10 @@ workers:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kol-tracker-db
+          property: connectionString
 
   - type: worker
     name: token-updater
@@ -61,3 +83,7 @@ workers:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: kol-tracker-db
+          property: connectionString
