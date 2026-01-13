@@ -13,17 +13,9 @@ services:
         value: 3.11.0
       - key: PORT
         value: 8501
+      # Connect to EXISTING database - don't create new one
       - key: DATABASE_URL
-        fromDatabase:
-          name: kol_tracker_db
-          property: connectionString
-
-databases:
-  # PostgreSQL Database - Shared by all processes
-  - name: kol_tracker_db
-    databaseName: kol_tracker_db
-    user: kol_tracker_db_user
-    plan: starter
+        value: postgresql://kol_tracker_db_user:quNTItA4CvEhk9KmsK1irizJQQGWu99X@dpg-d5jcq924d50c73fqo9t0-a.virginia-postgres.render.com/kol_tracker_db
 
 workers:
   # Single worker that runs ALL processes in parallel
@@ -39,7 +31,6 @@ workers:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      # Connect to EXISTING database - don't create new one
       - key: DATABASE_URL
-        fromDatabase:
-          name: kol_tracker_db
-          property: connectionString
+        value: postgresql://kol_tracker_db_user:quNTItA4CvEhk9KmsK1irizJQQGWu99X@dpg-d5jcq924d50c73fqo9t0-a.virginia-postgres.render.com/kol_tracker_db
