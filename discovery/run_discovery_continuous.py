@@ -14,9 +14,13 @@ import asyncio
 import argparse
 import signal
 import sys
+from pathlib import Path
 from datetime import datetime
 
-from token_buyer_discovery import TokenBuyerDiscovery
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from discovery.token_centric_discovery import TokenHolderDiscovery
 
 
 def signal_handler(sig, frame):
@@ -42,13 +46,6 @@ def main():
         help='Run discovery once and exit'
     )
 
-    parser.add_argument(
-        '--hours-to-analyze',
-        type=int,
-        default=24,
-        help='Hours of KOL buys to analyze (default: 24)'
-    )
-
     args = parser.parse_args()
 
     # Fix Windows encoding
@@ -58,11 +55,10 @@ def main():
 
     # Print banner
     print("=" * 70)
-    print("CONTINUOUS TOKEN BUYER DISCOVERY")
+    print("CONTINUOUS TOKEN HOLDER DISCOVERY")
     print("=" * 70)
     print(f"Start time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Discovery interval: {args.interval} hours")
-    print(f"Hours to analyze: {args.hours_to_analyze}")
     print(f"Mode: {'Run once' if args.once else 'Continuous'}")
     print("=" * 70)
     print()
@@ -72,26 +68,26 @@ def main():
     signal.signal(signal.SIGTERM, signal_handler)
 
     # Create discovery instance
-    discovery = TokenBuyerDiscovery()
+    discovery = TokenHolderDiscovery()
 
     async def run_discovery():
         """Run discovery once"""
         print(f"\n[*] Starting discovery run at {datetime.now().strftime('%H:%M:%S')}")
         print("-" * 70)
 
-        results = await discovery.analyze_recent_kol_buys(hours=args.hours_to_analyze)
+        results = await discovery.discover_from_performing_tokens(min_kols=2, min_multiple=2.0)
 
         print("\n" + "=" * 70)
         print("DISCOVERY SUMMARY")
         print("=" * 70)
-        print(f"Tokens analyzed: {results['analyzed']}")
-        print(f"New traders discovered: {results['discovered']}")
-        print(f"Promoted to KOL: {results['promoted']}")
+        print(f"Tokens analyzed: {results['tokens_analyzed']}")
+        print(f"Performing tokens: {results['performing_tokens']}")
+        print(f"New wallets discovered: {results['wallets_discovered']}")
 
-        if results['top_discovered']:
+        if results['wallets']:
             print("\nTop Discovered Traders:")
-            for i, trader in enumerate(results['top_discovered'][:5], 1):
-                print(f"  {i}. {trader['wallet'][:8]}... - Score: {trader['score']:.0f}")
+            for i, wallet in enumerate(results['wallets'][:5], 1):
+                print(f"  {i}. {wallet['wallet'][:8]}... - {wallet['balance_tokens']:,.0f} tokens")
 
     if args.once:
         # Run once and exit

@@ -7,7 +7,11 @@ Runs automatic model retraining every N hours
 import sys
 import argparse
 import signal
+from pathlib import Path
 from datetime import datetime
+
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from continuous_trainer.auto_trainer import ContinuousTrainer
 
