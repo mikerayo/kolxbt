@@ -14,13 +14,13 @@ services:
         value: 8501
       - key: DATABASE_URL
         fromDatabase:
-          name: kol-tracker-db
+          name: kol_tracker_db
           property: connectionString
 
 databases:
-  - name: kol-tracker-db
-    databaseName: kol_tracker
-    user: kol_tracker_user
+  - name: kol_tracker_db
+    databaseName: kol_tracker_db
+    user: kol_tracker_db_user
     plan: starter # Uses the free PostgreSQL tier
 
 workers:
@@ -37,7 +37,7 @@ workers:
         value: 3.11.0
       - key: DATABASE_URL
         fromDatabase:
-          name: kol-tracker-db
+          name: kol_tracker_db
           property: connectionString
 
   - type: worker
@@ -53,7 +53,7 @@ workers:
         value: 3.11.0
       - key: DATABASE_URL
         fromDatabase:
-          name: kol-tracker-db
+          name: kol_tracker_db
           property: connectionString
 
   - type: worker
@@ -69,7 +69,7 @@ workers:
         value: 3.11.0
       - key: DATABASE_URL
         fromDatabase:
-          name: kol-tracker-db
+          name: kol_tracker_db
           property: connectionString
 
   - type: worker
@@ -85,5 +85,5 @@ workers:
         value: 3.11.0
       - key: DATABASE_URL
         fromDatabase:
-          name: kol-tracker-db
+          name: kol_tracker_db
           property: connectionString
