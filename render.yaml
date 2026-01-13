@@ -45,7 +45,7 @@ workers:
     region: oregon
     branch: main
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: python discovery/run_token_discovery_continuous.py
+    startCommand: python discovery/run_discovery_continuous.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
