@@ -21,7 +21,7 @@ workers:
     region: oregon
     branch: main
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: python processes/run_tracker_continuous.py
+    startCommand: python init_db.py && python processes/run_tracker_continuous.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -33,7 +33,7 @@ workers:
     region: oregon
     branch: main
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: python processes/run_continuous_trainer.py
+    startCommand: python init_db.py && python processes/run_continuous_trainer.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -45,7 +45,7 @@ workers:
     region: oregon
     branch: main
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: python discovery/run_discovery_continuous.py
+    startCommand: python init_db.py && python discovery/run_discovery_continuous.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
@@ -57,7 +57,7 @@ workers:
     region: oregon
     branch: main
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: python processes/run_token_updater_both_continuous.py
+    startCommand: python init_db.py && python processes/run_token_updater_both_continuous.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
