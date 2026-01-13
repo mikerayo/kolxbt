@@ -10,9 +10,9 @@ import pandas as pd
 from typing import Tuple, List, Dict, Optional
 from datetime import datetime, timedelta
 
-from database import db, KOL, Trade, ClosedPosition
-from feature_engineering import KOLFeatures
-from ml_models import DiamondHandScorer
+from core.database import db, KOL, Trade, ClosedPosition
+from core.feature_engineering import KOLFeatures
+from core.ml_models import DiamondHandScorer
 
 
 class TokenPredictionDataset(Dataset):
