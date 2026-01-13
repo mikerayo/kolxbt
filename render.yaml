@@ -1,4 +1,5 @@
 services:
+  # Dashboard - Web UI
   - type: web
     name: kol-tracker-dashboard
     runtime: python
@@ -18,68 +19,23 @@ services:
           property: connectionString
 
 databases:
+  # PostgreSQL Database - Shared by all processes
   - name: kol_tracker_db
     databaseName: kol_tracker_db
     user: kol_tracker_db_user
-    plan: starter # Uses the free PostgreSQL tier
+    plan: starter
 
 workers:
+  # Single worker that runs ALL processes in parallel
   - type: worker
-    name: kol-tracker
+    name: kol-tracker-all
     runtime: python
     plan: starter
     region: oregon
     branch: main
     buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: python init_db.py && python processes/run_tracker_continuous.py
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
-      - key: DATABASE_URL
-        fromDatabase:
-          name: kol_tracker_db
-          property: connectionString
-
-  - type: worker
-    name: ml-trainer
-    runtime: python
-    plan: starter
-    region: oregon
-    branch: main
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: python init_db.py && python processes/run_continuous_trainer.py
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
-      - key: DATABASE_URL
-        fromDatabase:
-          name: kol_tracker_db
-          property: connectionString
-
-  - type: worker
-    name: token-discovery
-    runtime: python
-    plan: starter
-    region: oregon
-    branch: main
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: python init_db.py && python discovery/run_discovery_continuous.py
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
-      - key: DATABASE_URL
-        fromDatabase:
-          name: kol_tracker_db
-          property: connectionString
-
-  - type: worker
-    name: token-updater
-    runtime: python
-    plan: starter
-    region: oregon
-    branch: main
-    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
-    startCommand: python init_db.py && python processes/run_token_updater_both_continuous.py
+    # Initialize DB and start all processes
+    startCommand: python init_db.py && python run_all_processes.py
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
