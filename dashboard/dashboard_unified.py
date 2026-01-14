@@ -1291,7 +1291,7 @@ def main():
     st.markdown("---")
 
     # Tabs
-    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs([
+    tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9 = st.tabs([
         "🔥 Hot KOLs",
         "💎 Diamond Hands",
         "🕵️ Discovered",
@@ -1299,7 +1299,8 @@ def main():
         "🔄 Recent Trades",
         "🔍 KOL Details",
         "🪙 Tokens",
-        "📊 System Overview"
+        "📊 Performance",
+        "⚙️ System Overview"
     ])
 
     with tab1:
@@ -1324,6 +1325,11 @@ def main():
         display_tokens()
 
     with tab8:
+        # Import performance dashboard
+        from dashboard.pages.performance import display_performance_dashboard
+        display_performance_dashboard()
+
+    with tab9:
         display_system_overview(stats)
 
     # Footer
