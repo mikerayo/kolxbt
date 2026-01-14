@@ -43,6 +43,9 @@ class AdvancedKOLAnalyzer:
         if not kol:
             return {'error': 'KOL not found'}
 
+        # Convert kol_id to native int to avoid numpy.int64 PostgreSQL error
+        kol_id = int(kol_id)
+
         # Get all data
         trades = session.query(Trade).filter(Trade.kol_id == kol_id).all()
         closed_positions = session.query(ClosedPosition).filter(ClosedPosition.kol_id == kol_id).all()
@@ -118,7 +121,7 @@ class AdvancedKOLAnalyzer:
             # Find the buy trade for this position
             buy_trade = session.query(Trade).filter(
                 and_(
-                    Trade.kol_id == pos.kol_id,
+                    Trade.kol_id == int(pos.kol_id),
                     Trade.token_address == pos.token_address,
                     Trade.operation == 'buy',
                     Trade.timestamp <= pos.exit_time

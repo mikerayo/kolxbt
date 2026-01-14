@@ -31,7 +31,8 @@ def render_kol_selector():
         return None
 
     # Create dropdown with search
-    kol_names = {f"{kol.name} (ID: {kol.id})": int(kol.id) for kol, _ in kols}
+    # kols is a list of tuples like [(id, name), ...]
+    kol_names = {f"{name} (ID: {kol_id})": int(kol_id) for kol_id, name in kols}
     selected = st.selectbox(
         "Choose KOL",
         options=list(kol_names.keys()),

@@ -287,8 +287,8 @@ def display_hot_kols():
         cols = st.columns([3, 3, 2, 2, 2, 1])
 
         with cols[0]:
-            # Usar un botón con key único
-            if st.button(f"👤 {kol['name']}", key=f"kol_btn_{kol['name']}", use_container_width=True):
+            # Usar un botón con key único (agregar índice para evitar duplicados)
+            if st.button(f"👤 {kol['name']}", key=f"kol_btn_{i}_{kol['name']}", use_container_width=True):
                 st.session_state.selected_hot_kol = kol['name']
                 st.rerun()
 
@@ -388,7 +388,7 @@ def display_hot_kols():
 
                 if kol_obj:
                     positions = session.query(ClosedPosition).filter(
-                        ClosedPosition.kol_id == kol_obj.id
+                        ClosedPosition.kol_id == int(kol_obj.id)
                     ).order_by(ClosedPosition.exit_time.desc()).limit(10).all()
 
                     if positions:
@@ -701,7 +701,7 @@ def display_kol_details(df):
         if kol:
             # Get closed positions
             positions = session.query(ClosedPosition).filter(
-                ClosedPosition.kol_id == kol.id
+                ClosedPosition.kol_id == int(kol.id)
             ).order_by(ClosedPosition.exit_time.desc()).limit(20).all()
 
             if positions:

@@ -220,6 +220,8 @@ class DataManager:
         session = db.get_session()
 
         try:
+            # Convert kol_id to native int to avoid numpy.int64 PostgreSQL error
+            kol_id = int(kol_id)
             kol = session.query(KOL).filter(KOL.id == kol_id).first()
 
             if not kol:
@@ -254,6 +256,9 @@ class DataManager:
         session = db.get_session()
 
         try:
+            # Convert kol_id to native int to avoid numpy.int64 PostgreSQL error
+            kol_id = int(kol_id)
+
             positions = session.query(ClosedPosition).filter(
                 ClosedPosition.kol_id == kol_id
             ).order_by(
