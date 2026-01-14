@@ -142,7 +142,7 @@ async def full_scan(session, tracker):
     all_kols = db.get_all_kols(session)
 
     # Check if any discovered traders have been promoted
-    from database import DiscoveredTrader
+    from core.database import DiscoveredTrader
     promoted_count = session.query(DiscoveredTrader).filter(
         DiscoveredTrader.promoted_to_kol == True
     ).count()
