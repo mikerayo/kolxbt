@@ -13,8 +13,10 @@ Processes:
 import asyncio
 import signal
 import sys
+import os
 from pathlib import Path
 from datetime import datetime
+from threading import Thread
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent))
@@ -23,6 +25,7 @@ from processes.run_tracker_continuous import continuous_tracking_loop
 from processes.run_continuous_trainer import main as trainer_main
 from discovery.run_discovery_continuous import main as discovery_main
 from processes.run_token_updater_both_continuous import main as token_updater_main
+from keep_alive import start_http_server
 
 
 # Store running tasks
@@ -81,6 +84,12 @@ async def main():
     # Setup signal handlers
     signal.signal(signal.SIGINT, signal_handler)
     signal.signal(signal.SIGTERM, signal_handler)
+
+    # Start HTTP server in background thread for Render health checks
+    port = int(os.getenv("PORT", 8501))
+    http_thread = Thread(target=start_http_server, args=(port,), daemon=True)
+    http_thread.start()
+    print(f"[*] HTTP health check server started on port {port}")
 
     # Print banner
     print("\n" + "=" * 70)
