@@ -22,7 +22,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from processes.run_tracker_continuous import continuous_tracking_loop
 from processes.run_continuous_trainer import main as trainer_main
 from discovery.run_discovery_continuous import main as discovery_main
-from processes.run_token_updater_both_continuous import continuous_update_loop
+from processes.run_token_updater_both_continuous import main as token_updater_main
 
 
 # Store running tasks
@@ -85,7 +85,11 @@ async def run_discovery():
 async def run_token_updater():
     """Run token updater continuously"""
     print("[*] Starting Token Updater process...")
-    await continuous_update_loop()
+    # Token updater runs in its own loop
+    import asyncio
+    # Create a new task for the blocking main function
+    # The main function runs forever in a loop
+    await asyncio.to_thread(token_updater_main)
 
 
 async def main():
