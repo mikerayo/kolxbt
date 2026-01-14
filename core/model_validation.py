@@ -262,7 +262,7 @@ class ModelValidator:
             'position_index': range(len(positions)),
             'predicted_probability': y_pred_proba,
             'actual_result': y_true,
-            'pnl_multiple': [p.pnl_multiple for p in positions if p.pnl_multiple else 0],
+            'pnl_multiple': [p.pnl_multiple if p.pnl_multiple else 0 for p in positions],
             'exit_time': [p.exit_time for p in positions]
         })
 

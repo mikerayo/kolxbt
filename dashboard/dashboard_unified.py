@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from core.database import db, KOL, Trade, ClosedPosition, DiscoveredTrader, TokenInfo
 from core.feature_engineering import KOLFeatures, PositionMatcher
 from core.ml_models import DiamondHandScorer
-from hot_kols_scorer import HotKOLsScorer
+from discovery.hot_kols_scorer import HotKOLsScorer
 
 # Page config
 st.set_page_config(
