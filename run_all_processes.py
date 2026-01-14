@@ -25,6 +25,7 @@ from processes.run_tracker_continuous import continuous_tracking_loop
 from processes.run_continuous_trainer import main as trainer_main
 from discovery.run_discovery_continuous import main as discovery_main
 from processes.run_token_updater_both_continuous import main as token_updater_main
+from processes.run_closed_positions_continuous import closed_positions_loop
 from keep_alive import start_http_server
 
 
@@ -78,6 +79,12 @@ async def run_token_updater():
     await asyncio.to_thread(token_updater_main)
 
 
+async def run_closed_positions():
+    """Run closed positions creator continuously"""
+    print("[*] Starting Closed Positions Creator process...")
+    await closed_positions_loop()
+
+
 async def main():
     """Main orchestrator - runs all processes in parallel"""
 
@@ -107,13 +114,15 @@ async def main():
         asyncio.create_task(run_trainer(), name="ML-Trainer"),
         asyncio.create_task(run_discovery(), name="Token-Discovery"),
         asyncio.create_task(run_token_updater(), name="Token-Updater"),
+        asyncio.create_task(run_closed_positions(), name="Closed-Positions-Creator"),
     ]
 
     print("\n[+] All processes started:")
-    print("    🔍 Tracker          - Scans trades every 5 min")
-    print("    🧠 ML Trainer       - Trains models every 6 hours")
-    print("    🕵️ Token Discovery - Discovers traders every 12 hours")
-    print("    🪙 Token Updater    - Updates metadata every 35 min")
+    print("    🔍 Tracker                - Scans trades every 5 min")
+    print("    🧠 ML Trainer             - Trains models every 6 hours")
+    print("    🕵️ Token Discovery        - Discovers traders every 12 hours")
+    print("    🪙 Token Updater          - Updates metadata every 35 min")
+    print("    📊 Closed Positions       - Creates positions every 10 min")
     print("\n" + "=" * 70)
     print("ALL SYSTEMS OPERATIONAL")
     print("=" * 70)
