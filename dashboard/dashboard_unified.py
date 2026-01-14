@@ -593,8 +593,8 @@ def display_diamond_hands_leaderboard(df):
 
 
 def display_discovered_traders():
-    """Muestra Discovered Traders"""
-    st.markdown("### 🕵️ Discovered Traders")
+    """Muestra Discovered Traders con neon theme"""
+    st.markdown('<div class="kolxbt-title">🕵️ Discovered Traders</div>', unsafe_allow_html=True)
 
     session = db.get_session()
 
@@ -605,19 +605,24 @@ def display_discovered_traders():
         ).limit(20).all()
 
         if not traders:
-            st.info("No traders descubiertos aún. Ejecuta el discovery para encontrar nuevos traders.")
+            st.markdown("""
+            <div class="kolxbt-info-box">
+                <div class="kolxbt-info-box-title">💡 Run Discovery</div>
+                <div class="kolxbt-info-box-content">No traders discovered yet. Execute the discovery process to find new high-potential wallets.</div>
+            </div>
+            """, unsafe_allow_html=True)
             return
 
         # Convert to DataFrame
         df_data = []
         for trader in traders:
-            status = []
+            # Determine badge class and text
             if trader.promoted_to_kol:
-                status.append("PROMOTED")
+                badge = '<span class="kolxbt-badge kolxbt-badge-success">PROMOTED</span>'
             elif trader.is_tracking:
-                status.append("TRACKING")
+                badge = '<span class="kolxbt-badge kolxbt-badge-warning">TRACKING</span>'
             else:
-                status.append("DISCOVERED")
+                badge = '<span class="kolxbt-badge">DISCOVERED</span>'
 
             df_data.append({
                 'Wallet': trader.short_address,
@@ -626,13 +631,18 @@ def display_discovered_traders():
                 'Trades': trader.total_trades,
                 'Win Rate': f"{trader.win_rate:.1%}",
                 '3x+ Rate': f"{trader.three_x_rate:.1%}",
-                'Estado': ' '.join(status)
+                'Estado': badge
             })
 
         df = pd.DataFrame(df_data)
-        st.dataframe(df, width='stretch', hide_index=True)
+        st.dataframe(df, width='stretch', hide_index=True, use_container_width=True)
 
-        st.info("💡 Los traders descubiertos se promocionan automáticamente a KOL si score >= 80")
+        st.markdown("""
+        <div class="kolxbt-info-box">
+            <div class="kolxbt-info-box-title">💡 Auto-Promotion</div>
+            <div class="kolxbt-info-box-content">Discovered traders with score ≥ 80 are automatically promoted to KOL status</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     finally:
         session.close()
@@ -742,13 +752,18 @@ def display_charts(df):
 
 
 def display_recent_trades(stats):
-    """Display recent trades"""
-    st.markdown("### 🔄 Recent Trades")
+    """Display recent trades with neon theme"""
+    st.markdown('<div class="kolxbt-title">🔄 Recent Trades</div>', unsafe_allow_html=True)
 
     trades = stats['recent_trades']
 
     if not trades or len(trades) == 0:
-        st.warning("⏳ No recent trades available")
+        st.markdown("""
+        <div class="kolxbt-alert kolxbt-alert-warning">
+            <div class="kolxbt-alert-title">⏳ No Recent Trades</div>
+            <div class="kolxbt-alert-message">Waiting for new trades to be detected...</div>
+        </div>
+        """, unsafe_allow_html=True)
         return
 
     # Get token info dict
@@ -757,9 +772,13 @@ def display_recent_trades(stats):
     trade_data = []
     for trade in trades:
         token_display = format_token_display(trade['token_address'], token_dict)
+
+        # Add operation badge
+        op_badge = '<span class="kolxbt-badge kolxbt-badge-success">BUY</span>' if trade['operation'] == 'buy' else '<span class="kolxbt-badge kolxbt-badge-error">SELL</span>'
+
         trade_data.append({
             'KOL': trade['kol_name'],
-            'Operation': trade['operation'].upper(),
+            'Operation': op_badge,
             'Token': token_display,
             'Amount SOL': f"{trade['amount_sol']:.4f}",
             'Amount Token': f"{trade['amount_token']:.2f}",
@@ -768,15 +787,20 @@ def display_recent_trades(stats):
         })
 
     df = pd.DataFrame(trade_data)
-    st.dataframe(df, width='stretch', hide_index=True)
+    st.dataframe(df, width='stretch', hide_index=True, use_container_width=True)
 
 
 def display_kol_details(df):
-    """Display individual KOL details"""
-    st.markdown("### 🔍 KOL Details")
+    """Display individual KOL details with neon theme"""
+    st.markdown('<div class="kolxbt-title">🔍 KOL Details</div>', unsafe_allow_html=True)
 
     if df.empty:
-        st.warning("⏳ No KOL data available yet")
+        st.markdown("""
+        <div class="kolxbt-alert kolxbt-alert-warning">
+            <div class="kolxbt-alert-title">⏳ No Data Available</div>
+            <div class="kolxbt-alert-message">No KOL data available yet</div>
+        </div>
+        """, unsafe_allow_html=True)
         return
 
     # KOL selector
@@ -784,45 +808,69 @@ def display_kol_details(df):
     selected_kol = st.selectbox("Select KOL", kol_names, key='kol_selector')
 
     if not selected_kol:
-        st.info("👆 Select a KOL above to see detailed statistics")
+        st.markdown("""
+        <div class="kolxbt-info-box">
+            <div class="kolxbt-info-box-title">👆 Select a KOL</div>
+            <div class="kolxbt-info-box-content">Choose a KOL from the dropdown above to see detailed statistics</div>
+        </div>
+        """, unsafe_allow_html=True)
         return
 
     # Get KOL data
     kol_data = df[df['name'] == selected_kol].iloc[0]
 
-    # Display KOL info
+    # Display KOL info with neon cards
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.metric("Diamond Hand Score", f"{kol_data['diamond_hand_score']:.1f}/100")
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">Diamond Hand Score</div>
+            <div class="kolxbt-metric-value">{kol_data['diamond_hand_score']:.0f}</div>
+            <div class="kolxbt-metric-subtitle">Out of 100</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.metric("Total Trades", int(kol_data['total_trades']))
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">Total Trades</div>
+            <div class="kolxbt-metric-value">{int(kol_data['total_trades'])}</div>
+            <div class="kolxbt-metric-subtitle">All positions</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col3:
-        st.metric("Total PnL", f"{kol_data['total_pnl_sol']:.2f} SOL")
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">Total PnL</div>
+            <div class="kolxbt-metric-value">{kol_data['total_pnl_sol']:.1f}</div>
+            <div class="kolxbt-metric-subtitle">SOL profit/loss</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    # Tags
+    # Tags with badges
     col1, col2, col3 = st.columns(3)
 
     with col1:
         if kol_data['is_diamond_hand']:
-            st.success("💎 DIAMOND HAND")
+            st.markdown('<span class="kolxbt-badge kolxbt-badge-success" style="font-size: 14px;">💎 DIAMOND HAND</span>', unsafe_allow_html=True)
         else:
-            st.info("Not Diamond Hand")
+            st.markdown('<span class="kolxbt-badge">Standard Trader</span>', unsafe_allow_html=True)
 
     with col2:
         if kol_data['is_scalper']:
-            st.warning("⚡ SCALPER")
+            st.markdown('<span class="kolxbt-badge kolxbt-badge-warning" style="font-size: 14px;">⚡ SCALPER</span>', unsafe_allow_html=True)
         else:
-            st.info("Not Scalper")
+            st.markdown('<span class="kolxbt-badge">Position Trader</span>', unsafe_allow_html=True)
 
     with col3:
         win_rate = kol_data['win_rate'] * 100
         if win_rate >= 50:
-            st.success(f"Win Rate: {win_rate:.1f}%")
+            badge_class = "kolxbt-badge-success"
         else:
-            st.warning(f"Win Rate: {win_rate:.1f}%")
+            badge_class = "kolxbt-badge-warning"
+        st.markdown(f'<span class="kolxbt-badge {badge_class}" style="font-size: 14px;">Win Rate: {win_rate:.1f}%</span>', unsafe_allow_html=True)
 
     # Detailed stats
     st.markdown("#### 📊 Detailed Statistics")
@@ -883,62 +931,87 @@ def display_kol_details(df):
 
 
 def display_system_overview(stats):
-    """Muestra overview completo del sistema"""
-    st.markdown("### 📊 System Overview")
+    """Muestra overview completo del sistema con neon theme"""
+    st.markdown('<div class="kolxbt-title">📊 System Overview</div>', unsafe_allow_html=True)
 
-    # KOLs Metrics
+    # KOLs Metrics with neon cards
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.markdown("""
-        <div class="metric-card">
-            <div class="metric-value">{}</div>
-            <div class="metric-label">KOLs Trackeados</div>
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">KOLs Trackeados</div>
+            <div class="kolxbt-metric-value">{stats['total_kols']}</div>
+            <div class="kolxbt-metric-subtitle">Wallets monitoreadas</div>
         </div>
-        """.format(stats['total_kols']), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.markdown("""
-        <div class="metric-card">
-            <div class="metric-value">{:,}</div>
-            <div class="metric-label">Total Trades</div>
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">Total Trades</div>
+            <div class="kolxbt-metric-value">{stats['total_trades']:,}</div>
+            <div class="kolxbt-metric-subtitle">Operaciones detectadas</div>
         </div>
-        """.format(stats['total_trades']), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
     with col3:
-        st.markdown("""
-        <div class="metric-card">
-            <div class="metric-value">{:,}</div>
-            <div class="metric-label">Posiciones Cerradas</div>
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">Posiciones Cerradas</div>
+            <div class="kolxbt-metric-value">{stats['total_positions']:,}</div>
+            <div class="kolxbt-metric-subtitle">Trades completados</div>
         </div>
-        """.format(stats['total_positions']), unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
     # Discovery stats
     st.markdown("---")
-    st.markdown("#### 🆕 Discovery Stats")
+    st.markdown('<div class="kolxbt-chart-title">🆕 Discovery Stats</div>', unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.metric("Descubiertos", stats['discovered_total'])
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">Descubiertos</div>
+            <div class="kolxbt-metric-value" style="font-size: 36px;">{stats['discovered_total']}</div>
+            <div class="kolxbt-metric-subtitle">Nuevas wallets</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.metric("En Tracking", stats['discovered_tracking'])
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">En Tracking</div>
+            <div class="kolxbt-metric-value" style="font-size: 36px;">{stats['discovered_tracking']}</div>
+            <div class="kolxbt-metric-subtitle">Monitoreando</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col3:
-        st.metric("Promovidos a KOL", stats['discovered_promoted'])
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">Promovidos a KOL</div>
+            <div class="kolxbt-metric-value" style="font-size: 36px;">{stats['discovered_promoted']}</div>
+            <div class="kolxbt-metric-subtitle">Actualizados</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # Background processes status
     st.markdown("---")
-    st.markdown("#### ⚙️ Background Processes")
+    st.markdown('<div class="kolxbt-chart-title">⚙️ Background Processes</div>', unsafe_allow_html=True)
 
-    st.info("""
-    **Procesos Activos:**
-    - 🔍 **Tracker**: Escaneando trades cada 5 minutos
-    - 🧠 **ML Trainer**: Reentrenando cada 1 hora
-    - 🕵️ **Discovery**: Buscando nuevas wallets cada 6 horas
-    - 🪙 **Token Updater**: Actualizando metadata cada 35 minutos
-    """)
+    st.markdown("""
+    <div class="kolxbt-info-box">
+        <div class="kolxbt-info-box-title">Procesos Activos</div>
+        <div class="kolxbt-info-box-content" style="line-height: 2;">
+            🔍 <strong>Tracker</strong>: Escaneando trades cada 5 minutos<br>
+            🧠 <strong>ML Trainer</strong>: Reentrenando cada 1 hora<br>
+            🕵️ <strong>Discovery</strong>: Buscando nuevas wallets cada 6 horas<br>
+            🪙 <strong>Token Updater</strong>: Actualizando metadata cada 35 minutos
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 
 def display_tokens():
