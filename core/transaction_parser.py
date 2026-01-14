@@ -123,8 +123,11 @@ class TransactionParser:
         post_token_balances = meta.get('postTokenBalances', {})
 
         # Parse token balance changes to find the swap
+        # Pass both native SOL balances and token balances
         trade_data = self._parse_token_balance_changes(
-            pre_token_balances, post_token_balances, wallet_address
+            pre_token_balances, post_token_balances,
+            pre_balances, post_balances,
+            account_keys, wallet_address
         )
 
         if trade_data:
@@ -135,35 +138,40 @@ class TransactionParser:
 
     def _parse_token_balance_changes(
         self,
-        pre_balances: List[Dict],
-        post_balances: List[Dict],
+        pre_token_balances: List[Dict],
+        post_token_balances: List[Dict],
+        pre_balances: List[int],
+        post_balances: List[int],
+        account_keys: List[str],
         wallet_address: str
     ) -> Optional[Dict[str, Any]]:
         """
         Parse token balance changes to detect swaps
+
+        Now also processes native SOL (not just WSOL)
 
         Returns:
             Dict with token_address, operation, amount_sol, amount_token, price
         """
         # Build a map of account -> mint
         pre_mint_map = {}
-        for acc in pre_balances:
+        for acc in pre_token_balances:
             account = acc.get('accountIndex')
             mint = acc.get('mint')
             if account is not None and mint:
                 pre_mint_map[account] = mint
 
         post_mint_map = {}
-        for acc in post_balances:
+        for acc in post_token_balances:
             account = acc.get('accountIndex')
             mint = acc.get('mint')
             if account is not None and mint:
                 post_mint_map[account] = mint
 
-        # Get balance changes
+        # Get balance changes for tokens
         balance_changes = []
 
-        for acc in pre_balances:
+        for acc in pre_token_balances:
             account_index = acc.get('accountIndex')
             if account_index is None:
                 continue
@@ -176,7 +184,7 @@ class TransactionParser:
 
             # Find matching post balance
             post_acc = next(
-                (a for a in post_balances if a.get('accountIndex') == account_index),
+                (a for a in post_token_balances if a.get('accountIndex') == account_index),
                 None
             )
 
@@ -193,21 +201,32 @@ class TransactionParser:
                         'decimals': decimals
                     })
 
-        # If we have exactly 2 tokens changing, it's likely a swap
-        if len(balance_changes) == 2:
-            # Determine which is SOL and which is the token
-            sol_change = None
+        # Calculate native SOL change (from preBalances/postBalances)
+        sol_change = None
+        try:
+            wallet_index = account_keys.index(wallet_address)
+            if wallet_index < len(pre_balances) and wallet_index < len(post_balances):
+                pre_sol = pre_balances[wallet_index] / 1_000_000_000  # Convert lamports to SOL
+                post_sol = post_balances[wallet_index] / 1_000_000_000
+                sol_change = post_sol - pre_sol
+                # Debug logging
+                print(f"[DEBUG] Native SOL change: {sol_change:+.6f} (pre: {pre_sol:.6f}, post: {post_sol:.6f})")
+        except (ValueError, IndexError):
+            pass  # Wallet not found or invalid index
+
+        # If we have native SOL change and tokens changing, detect the swap
+        if sol_change is not None and abs(sol_change) > 0.000001:
+            # Find the token that's changing
             token_change = None
             token_address = None
 
             for change in balance_changes:
-                if change['mint'] == WSOL_MINT:
-                    sol_change = change['change']
-                else:
+                if change['mint'] != WSOL_MINT:  # Use the non-WSOL token
                     token_change = change['change']
                     token_address = change['mint']
+                    break
 
-            if sol_change is not None and token_change is not None and token_address:
+            if token_change is not None and token_address:
                 # Determine operation (buy or sell)
                 # If SOL decreased and token increased: BUY
                 # If SOL increased and token decreased: SELL
@@ -218,6 +237,49 @@ class TransactionParser:
                 elif sol_change > 0 and token_change < 0:
                     operation = 'sell'
                     amount_sol = sol_change
+                    amount_token = abs(token_change)
+                else:
+                    return None
+
+                # Calculate price (SOL per token)
+                if amount_token > 0:
+                    price = amount_sol / amount_token
+                else:
+                    price = None
+
+                return {
+                    'token_address': token_address,
+                    'operation': operation,
+                    'amount_sol': amount_sol,
+                    'amount_token': amount_token,
+                    'price': price
+                }
+
+        # Fallback: If we have exactly 2 tokens changing and one is WSOL
+        if len(balance_changes) == 2:
+            # Determine which is SOL and which is the token
+            wsol_change = None
+            token_change = None
+            token_address = None
+
+            for change in balance_changes:
+                if change['mint'] == WSOL_MINT:
+                    wsol_change = change['change']
+                else:
+                    token_change = change['change']
+                    token_address = change['mint']
+
+            if wsol_change is not None and token_change is not None and token_address:
+                # Determine operation (buy or sell)
+                # If SOL decreased and token increased: BUY
+                # If SOL increased and token decreased: SELL
+                if wsol_change < 0 and token_change > 0:
+                    operation = 'buy'
+                    amount_sol = abs(wsol_change)
+                    amount_token = token_change
+                elif wsol_change > 0 and token_change < 0:
+                    operation = 'sell'
+                    amount_sol = wsol_change
                     amount_token = abs(token_change)
                 else:
                     return None
