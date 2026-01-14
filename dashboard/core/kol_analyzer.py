@@ -15,7 +15,7 @@ from typing import Dict, List, Any
 from collections import Counter
 import numpy as np
 
-from database import db, Trade, ClosedPosition, KOL, OpenPosition
+from core.database import db, Trade, ClosedPosition, KOL, OpenPosition
 from sqlalchemy import func, and_, case as sql_case
 from dashboard.core.data_manager import get_data_manager
 

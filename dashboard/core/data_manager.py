@@ -10,7 +10,7 @@ import pandas as pd
 from typing import List, Dict, Any, Optional, Tuple
 from datetime import datetime, timedelta
 
-from database import db, KOL, Trade, ClosedPosition
+from core.database import db, KOL, Trade, ClosedPosition
 from dashboard.core.cache_manager import streamlit_cached
 from dashboard.core.state_manager import get_state
 

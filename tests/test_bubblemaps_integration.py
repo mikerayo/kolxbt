@@ -8,7 +8,7 @@ import asyncio
 from datetime import datetime
 
 from update_tokens_both import update_tokens_with_bubblemaps
-from database import db
+from core.database import db
 
 
 async def main():
@@ -40,7 +40,7 @@ async def main():
     print(f"  Errores: {result['errors']}")
 
     # Mostrar tokens en BD
-    from database import TokenInfo
+    from core.database import TokenInfo
     session = db.get_session()
     tokens = session.query(TokenInfo).all()
 

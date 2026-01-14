@@ -9,7 +9,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 from bubblemaps_api import BubblemapsAPI
-from database import db, TokenInfo
+from core.database import db, TokenInfo
 from datetime import datetime
 
 

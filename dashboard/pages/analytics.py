@@ -163,7 +163,7 @@ def render_activity_heatmap():
     data_manager = get_data_manager()
     session = data_manager.get_data_manager() if hasattr(data_manager, 'get_data_manager') else data_manager
 
-    from database import db, Trade
+    from core.database import db, Trade
     from sqlalchemy import func, extract
 
     session_db = db.get_session()

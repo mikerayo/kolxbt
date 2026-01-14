@@ -14,7 +14,7 @@ from datetime import datetime
 import pandas as pd
 from dashboard.core.state_manager import get_state
 from dashboard.core.kol_analyzer import get_advanced_analyzer
-from database import db, KOL
+from core.database import db, KOL
 
 
 def render_kol_selector():

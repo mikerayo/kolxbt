@@ -102,7 +102,7 @@ def render_token_performance_matrix():
     top_tokens = token_df.nlargest(20, 'unique_kols')['token_address'].tolist()
 
     # Get KOL-performance data for these tokens
-    from database import db, ClosedPosition
+    from core.database import db, ClosedPosition
     from sqlalchemy import func
 
     session = db.get_session()
@@ -193,7 +193,7 @@ def render_token_timing_analysis():
         return
 
     # Get closed positions
-    from database import db, ClosedPosition
+    from core.database import db, ClosedPosition
     from sqlalchemy import extract
 
     session = db.get_session()
@@ -328,7 +328,7 @@ def render_token_explorer():
     selected_token = token_df.iloc[selected_token_idx]['token_address']
 
     # Get KOLs who traded this token
-    from database import db, ClosedPosition, KOL
+    from core.database import db, ClosedPosition, KOL
 
     session = db.get_session()
 

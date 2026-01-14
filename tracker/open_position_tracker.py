@@ -14,8 +14,8 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Any, Optional
 import aiohttp
 
-from database import db, Trade, OpenPosition, ClosedPosition, KOL
-from config import RPC_URL
+from core.database import db, Trade, OpenPosition, ClosedPosition, KOL
+from core.config import RPC_URL
 
 
 class OpenPositionTracker:

@@ -4,7 +4,7 @@ Detailed test - Debug pump.fun detector
 """
 
 import asyncio
-from database import db
+from core.database import db
 from wallet_tracker import WalletTracker
 
 async def debug_pumpfun_detector():

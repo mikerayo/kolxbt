@@ -13,9 +13,9 @@ from deep_learning.token_predictor import TokenPredictor, create_token_predictor
 from deep_learning.kol_predictor import KOLPredictor, create_kol_predictor
 from deep_learning.model_utils import load_model
 from continuous_trainer.model_registry import ModelRegistry
-from database import db, KOL, Trade, ClosedPosition
-from feature_engineering import KOLFeatures
-from ml_models import DiamondHandScorer
+from core.database import db, KOL, Trade, ClosedPosition
+from core.feature_engineering import KOLFeatures
+from core.ml_models import DiamondHandScorer
 
 
 class BatchPredictor:

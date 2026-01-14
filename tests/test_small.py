@@ -4,7 +4,7 @@ Small test - Track just 1 KOL with 50 signatures max
 """
 
 import asyncio
-from database import db
+from core.database import db
 from wallet_tracker import WalletTracker
 
 async def test_one_kol_small():

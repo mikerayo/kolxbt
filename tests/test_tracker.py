@@ -2,7 +2,7 @@
 Quick test to verify the system works without full tracking
 """
 import asyncio
-from database import db
+from core.database import db
 from wallet_tracker import WalletTracker
 
 async def quick_test():

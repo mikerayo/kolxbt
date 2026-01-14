@@ -4,7 +4,7 @@ Quick test - Verify pump.fun detector works with 1 KOL
 """
 
 import asyncio
-from database import db
+from core.database import db
 from wallet_tracker import WalletTracker
 
 async def test_pumpfun_detector():

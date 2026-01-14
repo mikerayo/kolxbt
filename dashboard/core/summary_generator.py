@@ -17,7 +17,7 @@ from typing import Dict, List, Any
 import json
 from pathlib import Path
 
-from database import db, Trade, ClosedPosition, KOL
+from core.database import db, Trade, ClosedPosition, KOL
 from sqlalchemy import func, case as sql_case, and_
 from dashboard.core.data_manager import get_data_manager
 

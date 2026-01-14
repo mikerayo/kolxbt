@@ -213,7 +213,7 @@ async def update_token_metadata():
     if sys.platform == 'win32':
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-    from database import db, Trade, TokenInfo
+    from core.database import db, Trade, TokenInfo
     from sqlalchemy import func
 
     print("=" * 70)

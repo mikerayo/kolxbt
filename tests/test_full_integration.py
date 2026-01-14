@@ -10,7 +10,7 @@ if sys.platform == 'win32':
 
 from dexscreener_api import DexScreenerAPI
 from bubblemaps_api import BubblemapsAPI
-from database import db, TokenInfo
+from core.database import db, TokenInfo
 from datetime import datetime
 
 
