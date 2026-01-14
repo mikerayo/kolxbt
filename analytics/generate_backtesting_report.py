@@ -89,14 +89,14 @@ def generate_backtesting_report(
             "classification_report": model_metrics.classification_report
         }
 
-        print(f"  ✓ Accuracy: {model_metrics.accuracy:.1%}")
-        print(f"  ✓ Precision: {model_metrics.precision:.1%}")
-        print(f"  ✓ Recall: {model_metrics.recall:.1%}")
-        print(f"  ✓ F1 Score: {model_metrics.f1_score:.2f}")
+        print(f"  [OK] Accuracy: {model_metrics.accuracy:.1%}")
+        print(f"  [OK] Precision: {model_metrics.precision:.1%}")
+        print(f"  [OK] Recall: {model_metrics.recall:.1%}")
+        print(f"  [OK] F1 Score: {model_metrics.f1_score:.2f}")
         print()
 
     except Exception as e:
-        print(f"  ✗ Error: {e}")
+        print(f"  [ERROR] Error: {e}")
         print()
 
     # 2. Follow KOLs Strategy
@@ -121,14 +121,14 @@ def generate_backtesting_report(
             "expectancy": float(follow_results.expectancy)
         }
 
-        print(f"  ✓ Total Return: {follow_results.total_return:.1f}%")
-        print(f"  ✓ Sharpe Ratio: {follow_results.sharpe_ratio:.2f}")
-        print(f"  ✓ Max Drawdown: {follow_results.max_drawdown:.1f}%")
-        print(f"  ✓ Win Rate: {follow_results.win_rate:.1%}")
+        print(f"  [OK] Total Return: {follow_results.total_return:.1f}%")
+        print(f"  [OK] Sharpe Ratio: {follow_results.sharpe_ratio:.2f}")
+        print(f"  [OK] Max Drawdown: {follow_results.max_drawdown:.1f}%")
+        print(f"  [OK] Win Rate: {follow_results.win_rate:.1%}")
         print()
 
     except Exception as e:
-        print(f"  ✗ Error: {e}")
+        print(f"  [ERROR] Error: {e}")
         print()
 
     # 3. Buy & Hold Comparison
@@ -150,13 +150,13 @@ def generate_backtesting_report(
             "win_rate": float(best_period[1].win_rate)
         }
 
-        print(f"  ✓ Best Hold Period: {best_period[0].total_seconds() / 3600:.1f}h")
-        print(f"  ✓ Total Return: {best_period[1].total_return:.1f}%")
-        print(f"  ✓ Sharpe Ratio: {best_period[1].sharpe_ratio:.2f}")
+        print(f"  [OK] Best Hold Period: {best_period[0].total_seconds() / 3600:.1f}h")
+        print(f"  [OK] Total Return: {best_period[1].total_return:.1f}%")
+        print(f"  [OK] Sharpe Ratio: {best_period[1].sharpe_ratio:.2f}")
         print()
 
     except Exception as e:
-        print(f"  ✗ Error: {e}")
+        print(f"  [ERROR] Error: {e}")
         print()
 
     # 4. Top Performers Analysis
@@ -196,16 +196,16 @@ def generate_backtesting_report(
         # Top 10
         report["top_performers"] = kol_performance[:10]
 
-        print(f"  ✓ Analyzed {len(kol_performance)} KOLs with 5+ trades")
-        print(f"  ✓ Top performer: {report['top_performers'][0]['name'] if report['top_performers'] else 'N/A'}")
+        print(f"  [OK] Analyzed {len(kol_performance)} KOLs with 5+ trades")
+        print(f"  [OK] Top performer: {report['top_performers'][0]['name'] if report['top_performers'] else 'N/A'}")
         print()
 
     except Exception as e:
-        print(f"  ✗ Error: {e}")
+        print(f"  [ERROR] Error: {e}")
         print()
 
     # 5. Generate Recommendations
-    print("[✓] Generating recommendations...")
+    print("[[OK]] Generating recommendations...")
     report["recommendations"] = _generate_recommendations(report)
 
     # Save report
@@ -215,7 +215,7 @@ def generate_backtesting_report(
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(report, f, indent=2, default=str)
 
-    print(f"\n[✓] Report saved to: {output_file}")
+    print(f"\n[[OK]] Report saved to: {output_file}")
     print()
     print("=" * 70)
     print("RECOMMENDATIONS:")
