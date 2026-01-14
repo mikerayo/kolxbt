@@ -52,34 +52,17 @@ async def run_tracker():
 async def run_trainer():
     """Run ML trainer continuously"""
     print("[*] Starting ML Trainer process...")
-
-    # Run trainer with default settings
-    import argparse
-    args = argparse.Namespace(
-        interval=6,
-        check_interval=300,
-        once=False,
-        epochs=50,
-        batch_size=32,
-        learning_rate=0.001,
-        device='cpu'
-    )
-
-    await trainer_main(args)
+    # Run in thread since it's a blocking function
+    import asyncio
+    await asyncio.to_thread(trainer_main)
 
 
 async def run_discovery():
     """Run token discovery continuously"""
     print("[*] Starting Token Discovery process...")
-
-    # Import and run discovery
-    import argparse
-    args = argparse.Namespace(
-        interval=12,
-        once=False
-    )
-
-    await discovery_main(args)
+    # Run in thread since it's a blocking function
+    import asyncio
+    await asyncio.to_thread(discovery_main)
 
 
 async def run_token_updater():
