@@ -25,60 +25,141 @@ from core.feature_engineering import KOLFeatures, PositionMatcher
 from core.ml_models import DiamondHandScorer
 from discovery.hot_kols_scorer import HotKOLsScorer
 
-# Page config
+# Page config - kolxbt theme
 st.set_page_config(
-    page_title="KOL Tracker - Complete Dashboard",
-    page_icon="💎",
+    page_title="kolxbt - Crypto KOL Tracker",
+    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# Custom CSS - kolxbt dark theme with neon green
 st.markdown("""
 <style>
-    .main-header {
-        font-size: 2.5rem;
-        font-weight: bold;
-        background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 1rem;
-    }
-    .progress-container {
-        background: #f0f0f0;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 1rem 0;
-    }
-    .progress-bar {
-        background: linear-gradient(90deg, #4ECDC4, #44A08D);
-        height: 30px;
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: bold;
-        transition: width 0.3s ease;
-    }
-    .metric-card {
-        background: white;
-        padding: 1rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        text-align: center;
-    }
-    .metric-value {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #4ECDC4;
-    }
-    .metric-label {
-        font-size: 0.9rem;
-        color: #666;
-    }
+/* ================================
+   GLOBAL THEME - DARK MODE
+   ================================ */
+.stApp {
+    background-color: #121212;
+}
+
+/* ================================
+   HEADER
+   ================================ */
+.kolxbt-header {
+    background: linear-gradient(180deg, #1E1E1E 0%, #121212 100%);
+    border-bottom: 1px solid #333333;
+    padding: 24px;
+    margin: -24px -24px 24px -24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.kolxbt-title {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #00FF41, #39FF14);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.kolxbt-subtitle {
+    color: #B0B0B0;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* ================================
+   METRIC CARDS WITH NEON EFFECT
+   ================================ */
+.metric-card {
+    background: #1E1E1E !important;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    padding: 24px !important;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    border-color: #00FF41;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    transform: translateY(-2px);
+}
+
+.metric-value {
+    font-size: 48px;
+    font-weight: 700;
+    color: #00FF41 !important;
+    line-height: 1;
+    margin-bottom: 8px;
+    text-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+}
+
+.metric-label {
+    font-size: 12px;
+    color: #B0B0B0;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ================================
+   BUTTONS
+   ================================ */
+.stButton > button {
+    background: #2A2A2A;
+    color: #FFFFFF;
+    border: 1px solid #333333;
+    transition: all 0.3s ease;
+}
+
+.stButton > button:hover {
+    background: #00FF41;
+    color: #000000;
+    border-color: #00FF41;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+}
+
+/* ================================
+   TABS
+   ================================ */
+.stTabs [role="tablist"] {
+    background: #1E1E1E;
+    border-bottom: 1px solid #333333;
+}
+
+.stTabs [role="tab"][aria-selected="true"] {
+    background: #121212;
+    color: #00FF41;
+    border-bottom: 2px solid #00FF41;
+}
+
+.stTabs [role="tab"][aria-selected="false"] {
+    color: #B0B0B0;
+}
+
+.stTabs [role="tab"][aria-selected="false"]:hover {
+    color: #FFFFFF;
+    border-bottom: 2px solid #00FF41;
+}
+
+/* ================================
+   DATAFRAME
+   ================================
 </style>
 """, unsafe_allow_html=True)
+
+# Load external CSS file
+try:
+    with open('dashboard/styles/kolxbt_theme.css', 'r') as f:
+        css_content = f.read()
+    st.markdown(f'<style>{css_content}</style>', unsafe_allow_html=True)
+except:
+    pass  # Fallback to inline CSS above
 
 
 # ==================== DATA LOADING ====================
@@ -234,82 +315,115 @@ def display_progress_bar(progress_data, stats):
 
 
 def display_top_metrics(stats):
-    """Display key metrics at top"""
+    """Display key metrics at top with neon styling"""
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        st.metric(
-            label="💎 Total KOLs",
-            value=f"{stats['total_kols']}",
-            delta=None
-        )
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">Total KOLs</div>
+            <div class="kolxbt-metric-value">{stats['total_kols']}</div>
+            <div class="kolxbt-metric-subtitle">Tracked wallets</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col2:
-        st.metric(
-            label="📊 Total Trades",
-            value=f"{stats['total_trades']}",
-            delta=None
-        )
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">Total Trades</div>
+            <div class="kolxbt-metric-value">{stats['total_trades']}</div>
+            <div class="kolxbt-metric-subtitle">All operations</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col3:
-        st.metric(
-            label="🎯 Closed Positions",
-            value=f"{stats['total_positions']}",
-            delta=None
-        )
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">Closed Positions</div>
+            <div class="kolxbt-metric-value">{stats['total_positions']}</div>
+            <div class="kolxbt-metric-subtitle">Completed trades</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col4:
-        st.metric(
-            label="🔥 Active Traders",
-            value=f"{stats['kols_with_trades']}",
-            delta=None
-        )
+        st.markdown(f"""
+        <div class="kolxbt-metric-card">
+            <div class="kolxbt-metric-label">Active Traders</div>
+            <div class="kolxbt-metric-value">{stats['kols_with_trades']}</div>
+            <div class="kolxbt-metric-subtitle">24h activity</div>
+        </div>
+        """, unsafe_allow_html=True)
 
 
 def display_hot_kols():
-    """Muestra Hot KOLs Ranking con KOLs clicables"""
-    st.markdown("### 🔥 Hot KOLs (Últimas 24h)")
-    st.info("💡 Haz click en el nombre de un KOL para ver sus estadísticas detalladas")
+    """Muestra Hot KOLs Ranking con KOLs clicables - Neon styled"""
+    st.markdown('<div class="kolxbt-title">🔥 Hot KOLs (24h)</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="kolxbt-info-box">
+        <div class="kolxbt-info-box-title">💡 Tip</div>
+        <div class="kolxbt-info-box-content">Click on a KOL name to view detailed statistics</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     scorer = HotKOLsScorer()
     hot_kols = scorer.get_hot_kols(top_n=20, hours=24)
 
     if not hot_kols:
-        st.warning("No hay KOLs con actividad reciente")
+        st.markdown("""
+        <div class="kolxbt-alert kolxbt-alert-warning">
+            <div class="kolxbt-alert-title">⏳ No Recent Activity</div>
+            <div class="kolxbt-alert-message">No KOLs with activity in the last 24 hours</div>
+        </div>
+        """, unsafe_allow_html=True)
         return
 
     # Get selected KOL from session state
     if 'selected_hot_kol' not in st.session_state:
         st.session_state.selected_hot_kol = None
 
-    # Display KOLs con botones clicables
+    # Display KOLs con botones clicables con nuevo estilo
     for i, kol in enumerate(hot_kols):
-        cols = st.columns([3, 3, 2, 2, 2, 1])
+        # Determinar clase de badge según score
+        if kol['score'] >= 80:
+            badge_class = "kolxbt-badge-success"
+            badge_text = "🏆 ELITE"
+        elif kol['score'] >= 70:
+            badge_class = "kolxbt-badge-success"
+            badge_text = "🔥 HOT"
+        else:
+            badge_class = "kolxbt-badge-warning"
+            badge_text = "✅ GOOD"
 
-        with cols[0]:
-            # Usar un botón con key único (agregar índice para evitar duplicados)
-            if st.button(f"👤 {kol['name']}", key=f"kol_btn_{i}_{kol['name']}", use_container_width=True):
-                st.session_state.selected_hot_kol = kol['name']
-                st.rerun()
+        st.markdown(f"""
+        <div class="kolxbt-kol-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <div style="flex: 2; min-width: 200px;">
+                    <div class="kolxbt-kol-name">{kol['name']}</div>
+                    <div class="kolxbt-kol-address">{kol['short_address']}</div>
+                </div>
+                <div style="flex: 1; min-width: 100px;">
+                    <div class="kolxbt-metric-label">Score</div>
+                    <div class="kolxbt-kol-score">{kol['score']:.0f}</div>
+                </div>
+                <div style="flex: 1; min-width: 100px;">
+                    <div class="kolxbt-metric-label">Trades</div>
+                    <div class="kolxbt-metric-value" style="font-size: 24px;">{kol['breakdown']['recent_trades']}</div>
+                </div>
+                <div style="flex: 1; min-width: 100px;">
+                    <div class="kolxbt-metric-label">Volume</div>
+                    <div class="kolxbt-metric-value" style="font-size: 24px;">{round(kol['breakdown']['recent_volume'], 1)} SOL</div>
+                </div>
+                <div style="flex: 0 0 auto;">
+                    <span class="kolxbt-badge {badge_class}">{badge_text}</span>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-        with cols[1]:
-            st.write(f"`{kol['short_address']}`")
-
-        with cols[2]:
-            st.metric("Score", f"{kol['score']:.0f}", label_visibility="collapsed")
-
-        with cols[3]:
-            st.write(f"**{kol['breakdown']['recent_trades']}** trades")
-
-        with cols[4]:
-            st.write(f"**{round(kol['breakdown']['recent_volume'], 1)}** SOL")
-
-        with cols[5]:
-            estado = '🏆 ELITE' if kol['score'] >= 80 else '🔥 HOT' if kol['score'] >= 70 else '✅ GOOD'
-            st.write(estado)
-
-        if i < len(hot_kols) - 1:
-            st.markdown("---")
+        # Button for selecting KOL (hidden but functional)
+        if st.button(f"View {kol['name']}", key=f"kol_btn_{i}_{kol['name']}", help="Click to view details"):
+            st.session_state.selected_hot_kol = kol['name']
+            st.rerun()
 
     # Mostrar detalles del KOL seleccionado
     if st.session_state.selected_hot_kol:
@@ -422,15 +536,19 @@ def display_hot_kols():
 
 
 def display_diamond_hands_leaderboard(df):
-    """Display Diamond Hands leaderboard"""
-    st.markdown("### 💎 Diamond Hands Leaderboard")
+    """Display Diamond Hands leaderboard with neon theme"""
+    st.markdown('<div class="kolxbt-title">💎 Diamond Hands Leaderboard</div>', unsafe_allow_html=True)
 
     if df.empty:
-        st.warning("⏳ No data available yet. Waiting for analyzer to process KOLs...")
-        st.info("💡 Tip: The analyzer needs at least 5 closed positions (buy+sell) per KOL to generate rankings.")
+        st.markdown("""
+        <div class="kolxbt-alert kolxbt-alert-warning">
+            <div class="kolxbt-alert-title">⏳ No Data Available</div>
+            <div class="kolxbt-alert-message">Waiting for analyzer to process KOLs... (min 5 closed positions needed)</div>
+        </div>
+        """, unsafe_allow_html=True)
         return
 
-    # Filters
+    # Filters with neon styling
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -455,7 +573,7 @@ def display_diamond_hands_leaderboard(df):
     elif show_only == "Scalpers Only":
         filtered = filtered[filtered['is_scalper'] == True]
 
-    # Display table
+    # Display table with custom styling
     display_df = filtered[[
         'rank', 'name', 'diamond_hand_score', 'total_trades',
         'three_x_plus_rate', 'win_rate', 'avg_hold_time_hours', 'total_pnl_sol'
@@ -471,7 +589,7 @@ def display_diamond_hands_leaderboard(df):
         '3x+ Rate', 'Win Rate', 'Avg Hold (h)', 'Total PnL (SOL)'
     ]
 
-    st.dataframe(display_df, width='stretch', hide_index=True)
+    st.dataframe(display_df, width='stretch', hide_index=True, use_container_width=True)
 
 
 def display_discovered_traders():
@@ -521,29 +639,37 @@ def display_discovered_traders():
 
 
 def display_charts(df):
-    """Display visualization charts"""
+    """Display visualization charts with neon green theme"""
     if df.empty:
         return
 
-    st.markdown("### 📈 Visualizations")
+    st.markdown('<div class="kolxbt-title">📈 Analytics</div>', unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("#### Diamond Hand Score Distribution")
+        st.markdown('<div class="kolxbt-chart-title">Diamond Hand Score Distribution</div>', unsafe_allow_html=True)
         fig = px.histogram(
             df,
             x='diamond_hand_score',
             nbins=20,
-            title="Distribution of Diamond Hand Scores",
+            title="",
             labels={'diamond_hand_score': 'Score'},
-            color_discrete_sequence=['#4ECDC4']
+            color_discrete_sequence=['#00FF41']
         )
-        fig.update_layout(bargap=0.1)
-        st.plotly_chart(fig, width='stretch')
+        fig.update_layout(
+            bargap=0.1,
+            plot_bgcolor='#1E1E1E',
+            paper_bgcolor='#1E1E1E',
+            font=dict(color='#FFFFFF'),
+            xaxis=dict(gridcolor='#333333'),
+            yaxis=dict(gridcolor='#333333')
+        )
+        fig.update_traces(marker=dict(line=dict(color='#39FF14', width=2)))
+        st.plotly_chart(fig, width='stretch', use_container_width=True)
 
     with col2:
-        st.markdown("#### Win Rate vs 3x+ Rate")
+        st.markdown('<div class="kolxbt-chart-title">Win Rate vs 3x+ Rate</div>', unsafe_allow_html=True)
         fig = px.scatter(
             df,
             x='win_rate',
@@ -551,43 +677,68 @@ def display_charts(df):
             size='total_trades',
             color='diamond_hand_score',
             hover_name='name',
-            title="Win Rate vs 3x+ Rate",
+            title="",
             labels={
                 'win_rate': 'Win Rate',
                 'three_x_plus_rate': '3x+ Rate',
                 'total_trades': 'Total Trades'
             },
-            color_continuous_scale='Viridis'
+            color_continuous_scale=['#1a1a1a', '#00FF41', '#39FF14'],
+            range_color=[0, 100]
         )
-        st.plotly_chart(fig, width='stretch')
+        fig.update_layout(
+            plot_bgcolor='#1E1E1E',
+            paper_bgcolor='#1E1E1E',
+            font=dict(color='#FFFFFF'),
+            xaxis=dict(gridcolor='#333333'),
+            yaxis=dict(gridcolor='#333333')
+        )
+        st.plotly_chart(fig, width='stretch', use_container_width=True)
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("#### Hold Time Distribution")
+        st.markdown('<div class="kolxbt-chart-title">Hold Time Distribution</div>', unsafe_allow_html=True)
         fig = px.box(
             df,
             y='avg_hold_time_hours',
-            title="Average Hold Time Distribution",
-            labels={'avg_hold_time_hours': 'Hours'}
+            title="",
+            labels={'avg_hold_time_hours': 'Hours'},
+            boxpoints='outliers'
         )
-        st.plotly_chart(fig, width='stretch')
+        fig.update_layout(
+            plot_bgcolor='#1E1E1E',
+            paper_bgcolor='#1E1E1E',
+            font=dict(color='#FFFFFF'),
+            yaxis=dict(gridcolor='#333333')
+        )
+        fig.update_traces(marker_color='#00FF41', line_color='#39FF14')
+        st.plotly_chart(fig, width='stretch', use_container_width=True)
 
     with col2:
-        st.markdown("#### Top 10 KOLs by Score")
+        st.markdown('<div class="kolxbt-chart-title">Top 10 Diamond Hands</div>', unsafe_allow_html=True)
         top10 = df.nlargest(10, 'diamond_hand_score')
         fig = px.bar(
             top10,
             x='diamond_hand_score',
             y='name',
             orientation='h',
-            title="Top 10 Diamond Hands",
+            title="",
             labels={'diamond_hand_score': 'Score', 'name': 'KOL'},
             color='diamond_hand_score',
-            color_continuous_scale='Viridis'
+            color_continuous_scale=['#00FF41', '#39FF14'],
+            range_color=[min(top10['diamond_hand_score']), max(top10['diamond_hand_score'])]
+        )
+        fig.update_layout(
+            plot_bgcolor='#1E1E1E',
+            paper_bgcolor='#1E1E1E',
+            font=dict(color='#FFFFFF'),
+            xaxis=dict(gridcolor='#333333'),
+            yaxis=dict(gridcolor='#333333')
         )
         fig.update_yaxes(autorange="reversed")
-        st.plotly_chart(fig, width='stretch')
+        fig.update_traces(marker_line_color='#39FF14', marker_line_width=2)
+        st.plotly_chart(fig, width='stretch', use_container_width=True)
 
 
 def display_recent_trades(stats):
@@ -1269,8 +1420,13 @@ def display_tokens():
 def main():
     """Main unified dashboard"""
 
-    # Header
-    st.markdown('<h1 class="main-header">💎 KOL Tracker - Unified Dashboard</h1>', unsafe_allow_html=True)
+    # Header - kolxbt theme
+    st.markdown("""
+    <div class="kolxbt-header">
+        <div class="kolxbt-title">⚡ kolxbt</div>
+        <div class="kolxbt-subtitle">Crypto KOL Tracker - Advanced Analytics & Discovery</div>
+    </div>
+    """, unsafe_allow_html=True)
 
     # Load data
     progress_data = load_tracker_progress()
@@ -1332,13 +1488,18 @@ def main():
     with tab9:
         display_system_overview(stats)
 
-    # Footer
+    # Footer - kolxbt theme
     st.markdown("---")
     st.markdown(
         f"""
-        <div style='text-align: center; color: gray;'>
-            <p>KOL Tracker ML System - Tracking {stats['total_kols']} KOLs</p>
-            <p>Data updated every 5 minutes • ML retraining every 1 hour • Discovery every 6 hours</p>
+        <div style='text-align: center; color: #808080; padding: 20px;'>
+            <div style='font-size: 18px; font-weight: 600; color: #00FF41; margin-bottom: 8px;'>
+                ⚡ kolxbt - Crypto KOL Tracker
+            </div>
+            <p style='margin: 4px 0;'>Tracking {stats['total_kols']} KOLs • {stats['total_trades']} Trades</p>
+            <p style='margin: 4px 0; font-size: 12px; color: #666666;'>
+                Data updated every 5min • ML retraining every 1h • Discovery every 6h
+            </p>
         </div>
         """,
         unsafe_allow_html=True

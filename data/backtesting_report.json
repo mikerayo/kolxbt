@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-01-14T13:53:59.622580",
+  "period_days": 7,
+  "top_n_kols": 5,
+  "model_validation": {
+    "accuracy": 0.0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1_score": 0.0,
+    "roc_auc": 0.0,
+    "true_positives": 0,
+    "true_negatives": 0,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "calibration_error": 0.0,
+    "classification_report": "No data available"
+  },
+  "follow_kols_strategy": {
+    "total_trades": 0,
+    "win_rate": 0.0,
+    "total_return": 0.0,
+    "cagr": 0.0,
+    "sharpe_ratio": 0.0,
+    "sortino_ratio": 0.0,
+    "max_drawdown": 0.0,
+    "best_trade": 0.0,
+    "worst_trade": 0.0,
+    "profit_factor": 0.0,
+    "expectancy": 0.0
+  },
+  "buy_hold_comparison": null,
+  "top_performers": [],
+  "recommendations": "\u274c Model accuracy is low (<65%) - model needs retraining\n\u274c Follow KOLs strategy underperforms\n   Recommendation: Do NOT follow KOLs, use buy & hold instead\n\u2705 Maximum drawdown is well controlled (<20%)"
+}
