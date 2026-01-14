@@ -55,9 +55,13 @@ class TokenUpdater:
         """Run continuous token updates"""
         self.running = True
 
-        # Setup signal handlers
-        signal.signal(signal.SIGINT, self.signal_handler)
-        signal.signal(signal.SIGTERM, self.signal_handler)
+        # Setup signal handlers (only works in main thread)
+        try:
+            signal.signal(signal.SIGINT, self.signal_handler)
+            signal.signal(signal.SIGTERM, self.signal_handler)
+        except ValueError:
+            # Running in a thread (orchestrator mode), signals handled by parent
+            pass
 
         logger.info("=" * 70)
         logger.info("TOKEN UPDATER - DexScreener + Bubblemaps")

@@ -93,9 +93,13 @@ def main():
         min_data_age_hours=args.min_data_age
     )
 
-    # Setup signal handlers
-    signal.signal(signal.SIGINT, signal_handler)
-    signal.signal(signal.SIGTERM, signal_handler)
+    # Setup signal handlers (only works in main thread)
+    try:
+        signal.signal(signal.SIGINT, signal_handler)
+        signal.signal(signal.SIGTERM, signal_handler)
+    except ValueError:
+        # Running in a thread (orchestrator mode), signals handled by parent
+        pass
 
     # Run training
     training_kwargs = {
